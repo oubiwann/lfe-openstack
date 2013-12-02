@@ -1,16 +1,16 @@
 %% -*- erlang -*-
-{application, 'lfe-rackspace',
+{application, 'lfe-rax',
  [
   %% A quick description of the application.
-  {description, "My project description..."},
+  {description, "Pure LFE language bindings for the Rackspace Cloud"},
 
   %% The version of the application
-  {vsn, "0.1"},
+  {vsn, "0.0.1"},
 
   %% All modules used by the application.
   {modules,
    [
-    'lfe-rackspace'
+    'lfe-rax'
    ]},
 
   %% All of the registered names the application uses. This can be ignored.
