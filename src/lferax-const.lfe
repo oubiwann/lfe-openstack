@@ -36,3 +36,11 @@
       'dfw '"DFW"
       'ord '"ORD"
       'iad '"IAD")))
+
+(defun dot-dir () '"~/.rax")
+(defun username-file () (: filename join (list (dot-dir) '"username")))
+(defun password-file () (: filename join (list (dot-dir) '"password")))
+(defun apikey-file () (: filename join (list (dot-dir) '"apikey")))
+(defun username-env () '"RAX_USERNAME")
+(defun password-env () '"RAX_PASSWORD")
+(defun apikey-env () '"RAX_APIKEY")

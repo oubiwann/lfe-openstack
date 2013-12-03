@@ -43,3 +43,13 @@
     '"ORD"
     `(: dict fetch 'ord (: lferax-const regions)))
   (assert-equal 4 (: dict size (: lferax-const regions))))
+
+(defun files_test ()
+  (assert-equal '"~/.rax/username" `(: lferax-const username-file))
+  (assert-equal '"~/.rax/password" `(: lferax-const password-file))
+  (assert-equal '"~/.rax/apikey" `(: lferax-const apikey-file)))
+
+(defun env_test ()
+  (assert-equal '"RAX_USERNAME" `(: lferax-const username-env))
+  (assert-equal '"RAX_PASSWORD" `(: lferax-const password-env))
+  (assert-equal '"RAX_APIKEY" `(: lferax-const apikey-env)))
