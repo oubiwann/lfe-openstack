@@ -5,7 +5,8 @@ LFE = $(LFE_DIR)/bin/lfe
 LFEC = $(LFE_DIR)/bin/lfec
 LFE_UTILS_DIR = $(DEPS)/lfe-utils
 LFEUNIT_DIR = $(DEPS)/lfeunit
-ERL_LIBS = $(LFE_DIR):$(LFE_UTILS_DIR):$(LFEUNIT_DIR):./
+JIFFY_DIR = $(DEPS)/jiffy
+ERL_LIBS = $(LFE_DIR):$(LFE_UTILS_DIR):$(LFEUNIT_DIR):$(JIFFY_DIR):./
 SOURCE_DIR = ./src
 OUT_DIR = ./ebin
 TEST_DIR = ./test
@@ -23,6 +24,7 @@ clean-eunit:
 
 compile: get-deps clean-ebin
 	rebar compile
+	cd $(JIFFY_DIR) && rebar compile
 
 compile-tests: clean-eunit
 	mkdir -p $(TEST_OUT_DIR)
