@@ -3,6 +3,7 @@
 
 
 (defun post (url payload)
+  (: lferax-util start-services)
   (let* ((method 'post)
          (content-type '"application/json")
          (headers (list (tuple '"Content-Type" content-type)
