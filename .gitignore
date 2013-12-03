@@ -3,3 +3,5 @@ deps
 *.sublime-workspace
 *.beam
 .eunit
+debug-*
+ebin/*
