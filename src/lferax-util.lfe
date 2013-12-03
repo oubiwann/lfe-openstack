@@ -11,3 +11,14 @@
   (let (((tuple keys values) (: lists partition #'is_atom/1 data)))
     (: dict from_list
        (: lists zip keys values))))
+
+(defun json-wrap (data)
+  "Ugh. I'm not a fan of JSON in Erlang. Really not a fan."
+  (tuple (list data)))
+
+(defun json-wrap (data-1 data-2)
+  (tuple (list data-1 data-2)))
+
+(defun start-services ()
+  (: inets start)
+  (: ssl start))
