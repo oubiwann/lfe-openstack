@@ -7,7 +7,7 @@
 
 (defun auth-url () '"https://identity.api.rackspacecloud.com/v2.0/tokens")
 (defun user-agent-name () '"LFE Rackspace Cloud HTTP Client/0.0.1")
-(defun user-agent-url () '"https://github.com/oubiwann/lfe-rackspace")
+(defun user-agent-url () '"(+https://github.com/oubiwann/lfe-rackspace)")
 (defun user-agent () (++ (user-agent-name) '" " (user-agent-url)))
 (defun x-auth-user () '"X-Auth-User")
 (defun x-server-management-url () '"X-Server-Management-Url")
