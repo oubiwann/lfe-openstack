@@ -39,5 +39,13 @@
                                 (: string substr path-with-home 3))))
         ('true path-with-home)))
 
+(defun strip (string)
+  (: re replace
+     string
+     '"(^\\s+)|(\\s+$)"
+      ""
+      (list 'global (tuple 'return 'list))))
+
 (defun read-file (filename)
-  (: file read_file (expand-home-dir filename)))
+  (let (((tuple 'ok data) (: file read_file (expand-home-dir filename))))
+    (strip (binary_to_list data))))

@@ -52,3 +52,10 @@
   ;  (assert `(: lferax-util is-home-dir? ,tilde-dir))
   ;  (assert-not `(: lferax-util is-home-dir? ,expanded)))
   )
+
+(defun strip_test ()
+  (assert-equal '"data" `(: lferax-util strip '"data\n"))
+  (assert-equal '"data" `(: lferax-util strip '"data\n\n"))
+  (assert-equal '"data" `(: lferax-util strip '"data   "))
+  (assert-equal '"data" `(: lferax-util strip '"data   \n   "))
+  (assert-equal '"data" `(: lferax-util strip '"data   \n   \n")))
