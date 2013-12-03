@@ -19,7 +19,7 @@ This project depends upon the following, which installed to the ``deps``
 directory of this project when you run ``make deps``:
 
 * `LFE`_ (Lisp Flavored Erlang; needed only to compile)
-* ``_ (JSON-parsing library)
+* `Jiffy`_ (JSON-parsing library)
 * `lfeunit`_ (needed only to run the unit tests)
 * `lfe-utils`_ (various convenience functions)
 
@@ -37,5 +37,6 @@ Add content to me here!
 .. -----
 .. _rebar: https://github.com/rebar/rebar
 .. _LFE: https://github.com/rvirding/lfe
+.. _Jiffy: https://github.com/davisp/jiffy
 .. _lfeunit: https://github.com/lfe/lfeunit
 .. _lfe-utils: https://github.com/lfe/lfe-utils
