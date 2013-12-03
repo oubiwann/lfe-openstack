@@ -49,4 +49,13 @@
   ((username 'apikey apikey) (apikey-login username apikey))
   ((username 'password password) (password-login username password)))
 
+(defun get-disk-username ()
+  (: lferax-util read-file (: lferax-const username-file)))
+
+(defun get-disk-password ()
+  (: lferax-util read-file (: lferax-const password-file)))
+
+(defun get-disk-apikey ()
+  (: lferax-util read-file (: lferax-const apikey-file)))
+
 
