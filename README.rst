@@ -50,9 +50,10 @@ To install, simply do the following:
           make install
 
 We don't, however, recommend using ``lfe-rackspace`` like this. Rather, using it
-from with ``rebar`` from the ``clone`` ed directory. If you have another project
-where you'd like to utilize ``lfe-rackspace``, then add it to your ``deps`` in
-the project ``rebar.config`` file.
+with ``rebar`` from the ``clone`` ed directory.
+
+If you have another project where you'd like to utilize ``lfe-rackspace``, then
+add it to your ``deps`` in the project ``rebar.config`` file.
 
 
 Usage
@@ -120,9 +121,9 @@ or
 
     > (: lferax-identity login 'password)
 
-  Note that in the presence of both defined env vars and cred files, env will
-  allways be the default source of truth and files will only be used in the
-  absence of defined env vars.
+Note that in the presence of both defined env vars and cred files, env will
+allways be the default source of truth and files will only be used in the
+absence of defined env vars.
 
 After successfully logging in, you will get a response with a lot of data in
 it. You will need this data to perform additional tasks, so make sure you save
@@ -137,7 +138,10 @@ Service Data
 ============
 
 The response data from a successful login holds all the information you need to
-access the rest of Rackspace cloud services. Here are some examples
+access the rest of Rackspace cloud services. The following subsections detail
+some of these.
+
+TBD
 
 
 
