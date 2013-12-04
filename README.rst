@@ -10,7 +10,7 @@ Pure LFE (Lisp Flavored Erlang) language bindings for the Rackspace Cloud
 Introduction
 ************
 
-Inspired by the experimental Clojure bindings for the Rackspace Cloud, these
+Inspired by the experimental `Clojure bindings`_ for the Rackspace Cloud, these
 bindings provide Erlang/OTP and LFE/OTP programmers with a native API for
 creating and managing serviers in Rackspace's OpenStack cloud.
 
@@ -179,6 +179,7 @@ TBD
 
 .. Links
 .. -----
+.. _Clojure bindings: https://github.com/oubiwann/clj-rackspace
 .. _rebar: https://github.com/rebar/rebar
 .. _LFE: https://github.com/rvirding/lfe
 .. _Jiffy: https://github.com/davisp/jiffy
