@@ -65,7 +65,9 @@ Login
 ``lfe-rackspace`` provides several ways to pass your authentication credentials
 to the API:
 
-* Directly, using ``login/3``:
+
+Directly, using ``login/3``
+---------------------------
 
 .. code:: common-lisp
 
@@ -77,7 +79,9 @@ or
 
     > (: lferax-identity login '"alice" 'password `"asecret")
 
-* Indirectly, using ``login/0``:
+
+Indirectly, using ``login/0``
+-----------------------------
 
 .. code:: bash
 
@@ -99,7 +103,9 @@ or
 
     > (: lferax-identity login)
 
-* Indirectly, using ``login/1``:
+
+Indirectly, using ``login/1``
+-----------------------------
 
 .. code:: bash
 
@@ -121,9 +127,13 @@ or
 
     > (: lferax-identity login 'password)
 
-Note that in the presence of both defined env vars and cred files, env will
-allways be the default source of truth and files will only be used in the
-absence of defined env vars.
+
+Notes
+-----
+
+In the presence of both defined env vars and cred files, env will allways be
+the default source of truth and files will only be used in the absence of
+defined env vars.
 
 After successfully logging in, you will get a response with a lot of data in
 it. You will need this data to perform additional tasks, so make sure you save
