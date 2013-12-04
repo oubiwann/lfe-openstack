@@ -4,10 +4,18 @@ lfe-rackspace
 
 Pure LFE (Lisp Flavored Erlang) language bindings for the Rackspace Cloud
 
+
 Introduction
 ============
 
-Add content to me here!
+Inspired by the experimental Clojure bindings for the Rackspace Cloud, these
+bindings provide Erlang/OTP and LFE/OTP programmers with a native API for
+creating and managing serviers in Rackspace's OpenStack cloud.
+
+This API is written in LFE, but because LFE is 100% compatible with Erang Core,
+when compiled to ``.beam`` files, they are just as easy to integrate with other
+projects written in Erlang.
+
 
 Dependencies
 ------------
@@ -23,10 +31,22 @@ directory of this project when you run ``make deps``:
 * `lfeunit`_ (needed only to run the unit tests)
 * `lfe-utils`_ (various convenience functions)
 
+If you plan on installing lfe-rackspace system-wide, you will need to install
+these dependencies before using lfe-rackspace.
+
+
 Installation
 ============
 
-Add content to me here!
+To install, simply do the following:
+
+..code:: bash
+
+    $ git clone https://github.com/oubiwann/lfe-rackspace.git
+    $ cd lfe-rackspace
+    $ sudo ERL_LIB=`erl -eval 'io:fwrite(code:lib_dir()), halt().' -noshell` \
+          make install
+
 
 Usage
 =====
