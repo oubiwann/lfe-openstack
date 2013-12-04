@@ -66,13 +66,13 @@ to the API:
 
 * Directly, using ``login/3``:
 
-.. code:: lfe
+.. code:: common-lisp
 
     > (: lferax-identity login '"alice" 'apikey `"1234abcd")
 
 or
 
-.. code:: lfe
+.. code:: common-lisp
 
     > (: lferax-identity login '"alice" 'password `"asecret")
 
@@ -82,7 +82,9 @@ or
 
     $ export RAX_USERNAME=alice
     $ export RAX_APIKEY=1234abcd
-    ...
+
+.. code:: common-lisp
+
     > (: lferax-identity login)
 
 or
@@ -92,7 +94,7 @@ or
     $ cat "alice" > ~/.rax/username
     $ cat "1234abcd" > ~/.rax/apikey
 
-.. code:: lfe
+.. code:: common-lisp
 
     > (: lferax-identity login)
 
@@ -103,7 +105,7 @@ or
     $ export RAX_USERNAME=alice
     $ export RAX_PASSWORD=asecret
 
-.. code:: lfe
+.. code:: common-lisp
 
     > (: lferax-identity login 'password)
 
@@ -114,7 +116,7 @@ or
     $ cat "alice" > ~/.rax/username
     $ cat "asecret" > ~/.rax/password
 
-.. code:: lfe
+.. code:: common-lisp
 
     > (: lferax-identity login 'password)
 
@@ -126,7 +128,7 @@ After successfully logging in, you will get a response with a lot of data in
 it. You will need this data to perform additional tasks, so make sure you save
 it. From the LFE REPL, this would look like so:
 
-.. code:: lfe
+.. code:: common-lisp
 
     (set response (: lferax-identity login))
 
