@@ -19,7 +19,7 @@
    (json-wrap
      (tuple 'RAX-KSKEY:apiKeyCredentials
        (json-wrap (tuple 'username (: erlang list_to_binary username))
-                  (tuple 'apikey (: erlang list_to_binary apikey)))))))
+                  (tuple 'apiKey (: erlang list_to_binary apikey)))))))
 
 (defun get-password-auth-payload (username password)
   (binary_to_list
@@ -58,4 +58,39 @@
 (defun get-disk-apikey ()
   (: lferax-util read-file (: lferax-const apikey-file)))
 
+(defun get-env-username ()
+  (: os getenv (: lferax-const username-env)))
 
+(defun get-env-password ()
+  (: os getenv (: lferax-const password-env)))
+
+(defun get-env-apikey ()
+  (: os getenv (: lferax-const apikey-env)))
+
+(defun get-username ()
+  (let ((username (get-env-username)))
+    (cond ((not (=:= username 'false))
+           username)
+          ((get-disk-username)))))
+
+(defun get-password ()
+  (let ((password (get-env-password)))
+    (cond ((not (=:= password 'false))
+           password)
+          ((get-disk-password)))))
+
+(defun get-apikey ()
+  (let ((apikey (get-env-apikey)))
+    (cond ((not (=:= apikey 'false))
+           apikey)
+          ((get-disk-apikey)))))
+
+(defun get-apikey-or-password ()
+  (let ((apikey (get-apikey)))
+    (cond ((not (=:= apikey ""))
+           apikey)
+          ((get-password)))))
+
+(defun login ()
+  ""
+  (login (get-username) 'apikey (get-apikey)))
