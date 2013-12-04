@@ -3,6 +3,7 @@ PROJECT=lfe-rackspace
 LIB=lferax
 EBIN=ebin
 SRC=src
+CONFIG_DIR = ~/.rax
 LFE_DIR = $(DEPS)/lfe
 LFE_EBIN = $(LFE_DIR)/ebin
 LFE = $(LFE_DIR)/bin/lfe
@@ -38,7 +39,8 @@ get-install-dir:
 
 get-deps:
 	rebar get-deps
-	for DIR in $(wildcard $(DEPS)/*); do 	cd $$DIR; git pull; cd - ; done
+	for DIR in $(wildcard $(DEPS)/*); do cd $$DIR; git pull; cd - ; done
+	mkdir -p $(CONFIG_DIR)
 
 clean-ebin:
 	rm -f $(OUT_DIR)/*.beam
