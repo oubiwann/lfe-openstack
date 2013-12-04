@@ -57,6 +57,39 @@ with ``rebar`` from the ``clone`` ed directory.
 If you have another project where you'd like to utilize ``lfe-rackspace``, then
 add it to your ``deps`` in the project ``rebar.config`` file.
 
+You can also run the test suite from ``lfe-rackspace``:
+
+.. code:: bash
+
+    $ make check
+
+Which should give you output something like the following:
+
+.. code:: bash
+
+    ==> lfe-rackspace (eunit)
+    ======================== EUnit ========================
+    module 'lferax-util_tests'
+      lferax-util_tests: dict_test...[0.085 s] ok
+      lferax-util_tests: json-wrap_test...ok
+      lferax-util_tests: is-home-dir?_test...ok
+      lferax-util_tests: expand-home-dir_test...ok
+      lferax-util_tests: strip_test...ok
+      [done in 0.100 s]
+    module 'lferax-identity_tests'
+      lferax-identity_tests: build-creds-password_test...[0.046 s] ok
+      lferax-identity_tests: build-creds-apikey_test...ok
+      [done in 0.051 s]
+    module 'lferax-const_tests'
+      lferax-const_tests: auth-url_test...[0.052 s] ok
+      lferax-const_tests: services_test...ok
+      lferax-const_tests: regions_test...ok
+      lferax-const_tests: files_test...ok
+      lferax-const_tests: env_test...ok
+      [done in 0.067 s]
+    =======================================================
+      All 12 tests passed.
+
 
 Usage
 *****
