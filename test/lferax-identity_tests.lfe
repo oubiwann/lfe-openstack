@@ -30,7 +30,7 @@
   (let ((data (build-creds '"alice" 'apikey '"123abc"))
         (expected #((#(RAX-KSKEY:apiKeyCredentials
                         #((#(username #B(97 108 105 99 101))
-                             #(apikey #B(49 50 51 97 98 99)))))))))
+                             #(apiKey #B(49 50 51 97 98 99)))))))))
     (assert-equal expected data)))
 
 ; XXX this unit test is currently broken
