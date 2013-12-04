@@ -98,4 +98,4 @@
 (defun login (mode)
   ""
   (cond ((=:= mode 'apikey) (login))
-        ('true (login (get-username) 'password (get-password)))
+        ('true (login (get-username) 'password (get-password)))))
