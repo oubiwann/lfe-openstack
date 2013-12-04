@@ -49,8 +49,8 @@ To install, simply do the following:
     $ sudo ERL_LIB=`erl -eval 'io:fwrite(code:lib_dir()), halt().' -noshell` \
           make install
 
-We don't, however, recommend using lfe-rackspace like this. Rather, using it
-from with ``rebar`` from the ``clone``ed directory. If you have another project
+We don't, however, recommend using ``lfe-rackspace`` like this. Rather, using it
+from with ``rebar`` from the ``clone`` ed directory. If you have another project
 where you'd like to utilize ``lfe-rackspace``, then add it to your ``deps`` in
 the project ``rebar.config`` file.
 
