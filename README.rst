@@ -42,7 +42,7 @@ Installation
 
 To install, simply do the following:
 
-..code:: bash
+.. code:: bash
 
     $ git clone https://github.com/oubiwann/lfe-rackspace.git
     $ cd lfe-rackspace
@@ -66,19 +66,19 @@ to the API:
 
 * Directly, using ``login/3``:
 
-..code:: lfe
+.. code:: lfe
 
     > (: lferax-identity login '"alice" 'apikey `"1234abcd")
 
 or
 
-..code:: lfe
+.. code:: lfe
 
     > (: lferax-identity login '"alice" 'password `"asecret")
 
 * Indirectly, using ``login/0``:
 
-..code:: bash
+.. code:: bash
 
     $ export RAX_USERNAME=alice
     $ export RAX_APIKEY=1234abcd
@@ -87,34 +87,34 @@ or
 
 or
 
-..code:: bash
+.. code:: bash
 
     $ cat "alice" > ~/.rax/username
     $ cat "1234abcd" > ~/.rax/apikey
 
-..code:: lfe
+.. code:: lfe
 
     > (: lferax-identity login)
 
 * Indirectly, using ``login/1``:
 
-..code:: bash
+.. code:: bash
 
     $ export RAX_USERNAME=alice
     $ export RAX_PASSWORD=asecret
 
-..code:: lfe
+.. code:: lfe
 
     > (: lferax-identity login 'password)
 
 or
 
-..code:: bash
+.. code:: bash
 
     $ cat "alice" > ~/.rax/username
     $ cat "asecret" > ~/.rax/password
 
-..code:: lfe
+.. code:: lfe
 
     > (: lferax-identity login 'password)
 
@@ -126,7 +126,7 @@ After successfully logging in, you will get a response with a lot of data in
 it. You will need this data to perform additional tasks, so make sure you save
 it. From the LFE REPL, this would look like so:
 
-..code:: lfe
+.. code:: lfe
 
     (set response (: lferax-identity login))
 
