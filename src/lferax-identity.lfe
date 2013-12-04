@@ -71,25 +71,25 @@
   (let ((username (get-env-username)))
     (cond ((not (=:= username 'false))
            username)
-          ((get-disk-username)))))
+          ('true (get-disk-username)))))
 
 (defun get-password ()
   (let ((password (get-env-password)))
     (cond ((not (=:= password 'false))
            password)
-          ((get-disk-password)))))
+          ('true (get-disk-password)))))
 
 (defun get-apikey ()
   (let ((apikey (get-env-apikey)))
     (cond ((not (=:= apikey 'false))
            apikey)
-          ((get-disk-apikey)))))
+          ('true (get-disk-apikey)))))
 
 (defun get-apikey-or-password ()
   (let ((apikey (get-apikey)))
     (cond ((not (=:= apikey ""))
            apikey)
-          ((get-password)))))
+          ('true (get-password)))))
 
 (defun login ()
   ""
