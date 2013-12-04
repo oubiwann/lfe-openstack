@@ -4,6 +4,8 @@ lfe-rackspace
 
 Pure LFE (Lisp Flavored Erlang) language bindings for the Rackspace Cloud
 
+Plase note: this library is in an early stage of development and is not yet usable as a complete API.
+
 .. contents:: Table of Contents
 
 
