@@ -162,10 +162,6 @@ or
 
     > (: lferax-identity login 'password)
 
-
-Notes
------
-
 In the presence of both defined env vars and cred files, env will allways be
 the default source of truth and files will only be used in the absence of
 defined env vars.
@@ -194,6 +190,12 @@ response.
 Be aware that this function assumes a non-error Erlang result. If the first
 element of the returned data struction is ``error`` and not ``ok``, this
 function call will fail.
+
+With the response data from a successful login, one may then get one's token:
+
+.. code:: common-lisp
+
+    (set token (:lferax-identity get-token response))
 
 
 Service Data
