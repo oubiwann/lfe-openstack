@@ -99,3 +99,11 @@
   ""
   (cond ((=:= mode 'apikey) (login))
         ('true (login (get-username) 'password (get-password)))))
+
+(defun get-token (response)
+  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
+    (binary_to_list
+      (: ej get
+         #("access" "token" "id")
+         body))))
+
