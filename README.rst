@@ -205,7 +205,64 @@ The response data from a successful login holds all the information you need to
 access the rest of Rackspace cloud services. The following subsections detail
 some of these.
 
-TBD
+Note that many of these calls will return Rackspace API server response data as
+JSON data decoded to Erlang binary. As such, you will often see data like this
+after calling an API function:
+
+.. code:: common-lisp
+
+    (#((#(#B(110 97 109 101) #B(99 108 111 117 100 70 105 108 101 115 67 68 78))
+        #(#B(101 110 100 112 111 105 110 116 115)
+          (#((#(#B(114 101 103 105 111 110) #B(68 70 87))
+              #(#B(116 101 110 97 110 116 73 100)
+              ...
+
+Most of that data will be intermediary, and it won't matter that you can't read
+it. However, if you ever feel the need to, you can display that binary in a
+human-readable format: simply pass your data to
+``(: io format '"~p~n" (list your-data))`` and you will see something like this
+instead:
+
+.. code:: common-lisp
+
+    [{[{<<"name">>,<<"cloudFilesCDN">>},
+       {<<"endpoints">>,
+        [{[{<<"region">>,<<"DFW">>},
+           {<<"tenantId">>,
+           ...
+
+
+List of Services
+----------------
+
+To get a list of the services provided by Rackspace:
+
+.. code:: common-lisp
+
+    (: lferax-services get-service-catalog response)
+
+
+To get the endpoints for a particular service:
+
+.. code:: common-lisp
+
+    (: lferax-services get-service-endpoints response '"cloudServersOpenStack")
+
+The full list of available endpoints is provided in ``(: lferax-consts services)``.
+
+We provide some alias functions for commonly used service endpoints, e.g.:
+
+.. code:: common-lisp
+
+    (: lferax-services get-cloud-servers-v2-endpoints response)
+
+
+Service Endpoints
+-----------------
+
+
+Region Endpoint URL
+-------------------
 
 
 
