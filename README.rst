@@ -166,6 +166,10 @@ In the presence of both defined env vars and cred files, env will allways be
 the default source of truth and files will only be used in the absence of
 defined env vars.
 
+
+Login Response Data
+-------------------
+
 After successfully logging in, you will get a response with a lot of data in
 it. You will need this data to perform additional tasks, so make sure you save
 it. From the LFE REPL, this would look like so:
@@ -191,11 +195,40 @@ Be aware that this function assumes a non-error Erlang result. If the first
 element of the returned data struction is ``error`` and not ``ok``, this
 function call will fail.
 
+
+User Auth Token
+---------------
+
 With the response data from a successful login, one may then get one's token:
 
 .. code:: common-lisp
 
     (set token (: lferax-identity get-token response))
+
+
+Tentant ID
+----------
+
+TThe tenant ID is an important bit of information that you will need for
+further calls to the Rackspace Cloud APIs. You get it in the same manner:
+
+
+.. code:: common-lisp
+
+    (set tenant-id (: lferax-identity get-tenant-id response))
+
+
+
+User Info
+---------
+
+Simiarly, after login, you will be able to extract your user id:
+
+.. code:: common-lisp
+
+    (set user-id (: lferax-identity get-user-id response))
+    (set user-name (: lferax-identity get-user-name response))
+
 
 
 Service Data
