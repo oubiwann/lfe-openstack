@@ -107,3 +107,27 @@
          #("access" "token" "id")
          body))))
 
+(defun get-tenant-id (response)
+  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
+    (binary_to_list
+      (: ej get
+         #("access" "token" "tenant" "id")
+         body))))
+
+(defun get-user-id (response)
+  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
+    (binary_to_list
+      (: ej get
+         #("access" "user" "id")
+         body))))
+
+(defun get-user-name (response)
+  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
+    (binary_to_list
+      (: ej get
+         #("access" "user" "name")
+         body))))
+
+
+
+
