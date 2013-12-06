@@ -195,7 +195,7 @@ With the response data from a successful login, one may then get one's token:
 
 .. code:: common-lisp
 
-    (set token (:lferax-identity get-token response))
+    (set token (: lferax-identity get-token response))
 
 
 Service Data
