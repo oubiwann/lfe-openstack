@@ -178,6 +178,23 @@ it. From the LFE REPL, this would look like so:
 
     (set response (: lferax-identity login))
 
+There's a utility function we can use here to extract the parts of the
+response. 
+
+.. code:: common-lisp
+
+    (set (list erlang-ok-status 
+               http-version 
+               http-status-code 
+               http-status-message 
+               headers
+               body)
+         (: lferax-util parse-json-response-ok response))
+
+Be aware that this function assumes a non-error Erlang result. If the first
+element of the returned data struction is ``error`` and not ``ok``, this
+function call will fail.
+
 
 Service Data
 ============
