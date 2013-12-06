@@ -49,3 +49,34 @@
 (defun read-file (filename)
   (let (((tuple 'ok data) (: file read_file (expand-home-dir filename))))
     (strip (binary_to_list data))))
+
+(defun parse-json-response-ok (response)
+  (let (((tuple erlang-ok-status
+                (tuple (tuple http-version
+                              http-status-code
+                              http-status-message)
+                       headers
+                       body)) response))
+    (list erlang-ok-status
+          http-version
+          http-status-code
+          http-status-message
+          (: dict from_list headers)
+          (: jiffy decode body))))
+
+; XXX this is just a copy of the above; needs to really be implemented
+(defun parse-json-response-error (response)
+  (let (((tuple erlang-error-status
+                (tuple (tuple http-version
+                              http-status-code
+                              http-status-message)
+                       headers
+                       body))
+         response))
+    (list erlang-error-status
+          http-version
+          http-status-code
+          http-status-message
+          (: dict from_list headers)
+          (: jiffy decode body))))
+
