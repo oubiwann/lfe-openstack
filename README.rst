@@ -175,14 +175,14 @@ it. From the LFE REPL, this would look like so:
     (set response (: lferax-identity login))
 
 There's a utility function we can use here to extract the parts of the
-response. 
+response.
 
 .. code:: common-lisp
 
-    (set (list erlang-ok-status 
-               http-version 
-               http-status-code 
-               http-status-message 
+    (set (list erlang-ok-status
+               http-version
+               http-status-code
+               http-status-message
                headers
                body)
          (: lferax-util parse-json-response-ok response))
@@ -267,10 +267,10 @@ Furthermore, you can get a services URL by region:
 
 .. code:: common-lisp
 
-    (: lferax-services get-cloud-servers-v2-url response '"DFW"))
-    
+    (: lferax-services get-cloud-servers-v2-url response '"DFW")
+
 A full list of regions that can be passed (as in "DFW" above) is
-provided in ``(: lferax-consts services)``. 
+provided in ``(: lferax-consts services)``.
 
 
 Cloud Servers
