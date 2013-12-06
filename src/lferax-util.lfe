@@ -80,3 +80,6 @@
           (: dict from_list headers)
           (: jiffy decode body))))
 
+(defun get-json-body (response)
+  (let (((list _ _ _ _ _ body) (parse-json-response-ok response)))
+    body))

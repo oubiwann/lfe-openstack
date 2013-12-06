@@ -12,3 +12,9 @@
          (http-options ())
          (options ()))
   (: httpc request method request-data http-options options)))
+
+(defun get (url region token)
+  )
+
+(defun get (url region)
+  )

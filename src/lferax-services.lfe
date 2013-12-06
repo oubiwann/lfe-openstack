@@ -2,14 +2,10 @@
   (export all))
 
 
-(defun -get-body (response)
-  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
-    body))
-
 (defun get-service-catalog (identity-response)
   (: ej get
      #("access" "serviceCatalog")
-     (-get-body identity-response)))
+     (: lferax-util get-json-body identity-response)))
 
 (defun get-service-endpoints (identity-response service-type)
   (: ej get

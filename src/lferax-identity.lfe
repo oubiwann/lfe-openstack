@@ -101,32 +101,28 @@
         ('true (login (get-username) 'password (get-password)))))
 
 (defun get-token (response)
-  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
-    (binary_to_list
-      (: ej get
-         #("access" "token" "id")
-         body))))
+  (binary_to_list
+    (: ej get
+       #("access" "token" "id")
+       (: lferax-util get-json-body response))))
 
 (defun get-tenant-id (response)
-  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
-    (binary_to_list
-      (: ej get
-         #("access" "token" "tenant" "id")
-         body))))
+  (binary_to_list
+    (: ej get
+       #("access" "token" "tenant" "id")
+       (: lferax-util get-json-body response))))
 
 (defun get-user-id (response)
-  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
-    (binary_to_list
-      (: ej get
-         #("access" "user" "id")
-         body))))
+  (binary_to_list
+    (: ej get
+       #("access" "user" "id")
+       (: lferax-util get-json-body response))))
 
 (defun get-user-name (response)
-  (let (((list _ _ _ _ _ body) (: lferax-util parse-json-response-ok response)))
-    (binary_to_list
-      (: ej get
-         #("access" "user" "name")
-         body))))
+  (binary_to_list
+    (: ej get
+       #("access" "user" "name")
+       (: lferax-util get-json-body response))))
 
 
 
