@@ -242,6 +242,9 @@ To get a list of the services provided by Rackspace:
     (: lferax-services get-service-catalog response)
 
 
+Service Endpoints
+-----------------
+
 To get the endpoints for a particular service:
 
 .. code:: common-lisp
@@ -256,22 +259,18 @@ We provide some alias functions for commonly used service endpoints, e.g.:
 
     (: lferax-services get-cloud-servers-v2-endpoints response)
 
-Furthermore, you can get a services URL by region:
-
-.. code:: common-lisp
-
-    (: lferax-services get-cloud-servers-v2-url (response region))
-    
-A full list of regions is provided in ``(: lferax-consts services)``. 
-    
-
-Service Endpoints
------------------
-
 
 Region Endpoint URL
 -------------------
 
+Furthermore, you can get a services URL by region:
+
+.. code:: common-lisp
+
+    (: lferax-services get-cloud-servers-v2-url response '"DFW"))
+    
+A full list of regions that can be passed (as in "DFW" above) is
+provided in ``(: lferax-consts services)``. 
 
 
 Cloud Servers
