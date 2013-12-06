@@ -284,7 +284,14 @@ To get the endpoints for a particular service:
 
     (: lferax-services get-service-endpoints response '"cloudServersOpenStack")
 
-The full list of available endpoints is provided in ``(: lferax-consts services)``.
+The full list of available endpoints is provided in
+``(: lferax-consts services)``. We recommend using the ``dict`` provided there,
+keying off the appropriate atom for the service that you need, e.g.:
+
+.. code:: common-lisp
+
+    (set service (: dict fetch 'servers-v2 (: lferax-const services)))
+    (: lferax-services get-service-endpoints response service)
 
 We provide some alias functions for commonly used service endpoints, e.g.:
 
@@ -296,7 +303,7 @@ We provide some alias functions for commonly used service endpoints, e.g.:
 Region Endpoint URL
 -------------------
 
-Furthermore, you can get a services URL by region:
+Furthermore, you can get a service's URL by region:
 
 .. code:: common-lisp
 
@@ -304,6 +311,14 @@ Furthermore, you can get a services URL by region:
 
 A full list of regions that can be passed (as in "DFW" above) is
 provided in ``(: lferax-consts services)``.
+
+We actually recommand using the documented atoms for the regions (just like
+the services above):
+
+.. code:: common-lisp
+
+    (set region (: dict fetch 'dfw (: lferax-const regions)))
+    (: lferax-services get-cloud-servers-v2-url response region)
 
 
 Cloud Servers
