@@ -256,7 +256,7 @@ human-readable format: simply pass your data to
 ``(: io format '"~p~n" (list your-data))`` and you will see something like this
 instead:
 
-.. code:: common-lisp
+.. code:: erlang
 
     [{[{<<"name">>,<<"cloudFilesCDN">>},
        {<<"endpoints">>,
