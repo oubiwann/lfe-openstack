@@ -8,12 +8,14 @@
 (defun auth-url () '"https://identity.api.rackspacecloud.com/v2.0/tokens")
 (defun user-agent-name () '"LFE Rackspace Cloud HTTP Client/0.0.1")
 (defun user-agent-url () '"(+https://github.com/oubiwann/lfe-rackspace)")
-(defun user-agent () (++ (user-agent-name) '" " (user-agent-url)))
+(defun user-agent-string () (++ (user-agent-name) '" " (user-agent-url)))
 (defun x-auth-user () '"X-Auth-User")
 (defun x-server-management-url () '"X-Server-Management-Url")
 (defun x-auth-key () '"X-Auth-Key")
 (defun x-storage-url () '"X-Storage-Url")
 (defun x-auth-token () '"X-Auth-Token")
+(defun content-type () '"Content-Type")
+(defun user-agent () '"User-Agent")
 
 (defun services ()
   (dict
