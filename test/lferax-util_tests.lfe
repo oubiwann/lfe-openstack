@@ -42,9 +42,9 @@
   (assert-equal '"value 2" `(: dict fetch 'key-2 ,(test-dict-2))))
 
 (defun json-wrap_test ()
-  (let ((result-1 (: lferax-util json-wrap-2 (test-dict-data-1)))
-        (result-2 (: lferax-util json-wrap-2 (test-dict-data-2)))
-        (result-3 (: lferax-util json-wrap-2 (test-dict-data-3))))
+  (let ((result-1 (: lferax-util json-wrap (test-dict-data-1)))
+        (result-2 (: lferax-util json-wrap (test-dict-data-2)))
+        (result-3 (: lferax-util json-wrap (test-dict-data-3))))
     (assert-equal #((#(key-1 "value 1"))) result-1)
     (assert-equal #((#(key-1 "value 1") #(key-2 "value 2"))) result-2)
     (assert-equal #((#(key-1 "value 1") #(key-2 "value 2") #(key-3 "value 3")))
