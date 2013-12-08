@@ -3,8 +3,6 @@
   (import
     (from lferax-util
           (json-wrap 1)
-          (json-wrap 2)
-          (json-wrap-2 1)
           (json-wrap-bin 1))))
 
 
@@ -59,10 +57,10 @@
   well. As such, all strings should be converted to binary before being passed
   to Jiffy."
   (json-wrap
-    (tuple 'server
-      (json-wrap-bin (list 'name server-name
-                           'imageRef image-id
-                           'flavorRef flavor-id)))))
+    (list 'server
+          (json-wrap-bin (list 'name server-name
+                               'imageRef image-id
+                               'flavorRef flavor-id)))))
 
 (defun get-new-server-encoded-payload (server-name image-id flavor-id)
   (binary_to_list

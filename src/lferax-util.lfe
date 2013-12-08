@@ -20,17 +20,12 @@
 
 (defun json-wrap (data)
   "Ugh. I'm not a fan of JSON in Erlang. Really not a fan."
-  (tuple (list data)))
-
-(defun json-wrap (data-1 data-2)
-  (tuple (list data-1 data-2)))
-
-(defun json-wrap-2 (data)
   (let* (((tuple keys values) (partition-list data))
          (pairs (: lists zip keys values)))
     (tuple pairs)))
 
 (defun json-wrap-bin (data)
+  "Same as above, but convert values to binary in addition."
   (let* (((tuple keys values) (partition-list data))
          (values (: lists map #'list_to_binary/1 values))
          (pairs (: lists zip keys values)))

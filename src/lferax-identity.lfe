@@ -3,8 +3,6 @@
   (import
     (from lferax-util
           (json-wrap 1)
-          (json-wrap 2)
-          (json-wrap-2 1)
           (json-wrap-bin 1))))
 
 
@@ -13,12 +11,12 @@
   well. As such, all strings should be converted to binary before being passed
   to Jiffy."
   ((username 'password password)
-   (json-wrap-2
+   (json-wrap
      (list 'passwordCredentials
            (json-wrap-bin (list 'username username
                                 'password password)))))
   ((username 'apikey apikey)
-   (json-wrap-2
+   (json-wrap
      (list 'RAX-KSKEY:apiKeyCredentials
            (json-wrap-bin (list 'username username
                                 'apiKey apikey))))))
@@ -26,12 +24,12 @@
 (defun get-password-auth-payload (username password)
   (binary_to_list
     (: jiffy encode
-      (json-wrap (tuple 'auth (build-creds username 'password password))))))
+      (json-wrap (list 'auth (build-creds username 'password password))))))
 
 (defun get-apikey-auth-payload (username apikey)
   (binary_to_list
     (: jiffy encode
-      (json-wrap (tuple 'auth (build-creds username 'apikey apikey))))))
+      (json-wrap (list 'auth (build-creds username 'apikey apikey))))))
 
 (defun get-auth-payload
   ((username 'apikey apikey) (get-apikey-auth-payload username apikey))
