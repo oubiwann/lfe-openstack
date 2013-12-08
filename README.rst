@@ -176,7 +176,7 @@ it. From the LFE REPL, this would look like so:
 
 .. code:: common-lisp
 
-    (set response (: lferax-identity login))
+    (set auth-response (: lferax-identity login))
 
 There's a utility function we can use here to extract the parts of the
 response.
@@ -189,7 +189,7 @@ response.
                http-status-message
                headers
                body)
-         (: lferax-util parse-json-response-ok response))
+         (: lferax-util parse-json-response-ok auth-response))
 
 Be aware that this function assumes a non-error Erlang result. If the first
 element of the returned data struction is ``error`` and not ``ok``, this
@@ -203,7 +203,7 @@ With the response data from a successful login, one may then get one's token:
 
 .. code:: common-lisp
 
-    (set token (: lferax-identity get-token response))
+    (set token (: lferax-identity get-token auth-response))
 
 
 Tentant ID
@@ -215,7 +215,7 @@ further calls to the Rackspace Cloud APIs. You get it in the same manner:
 
 .. code:: common-lisp
 
-    (set tenant-id (: lferax-identity get-tenant-id response))
+    (set tenant-id (: lferax-identity get-tenant-id auth-response))
 
 
 
@@ -226,8 +226,8 @@ Simiarly, after login, you will be able to extract your user id:
 
 .. code:: common-lisp
 
-    (set user-id (: lferax-identity get-user-id response))
-    (set user-name (: lferax-identity get-user-name response))
+    (set user-id (: lferax-identity get-user-id auth-response))
+    (set user-name (: lferax-identity get-user-name auth-response))
 
 
 
@@ -272,7 +272,7 @@ To get a list of the services provided by Rackspace:
 
 .. code:: common-lisp
 
-    (: lferax-services get-service-catalog response)
+    (: lferax-services get-service-catalog auth-response)
 
 
 Service Endpoints
@@ -282,7 +282,8 @@ To get the endpoints for a particular service:
 
 .. code:: common-lisp
 
-    (: lferax-services get-service-endpoints response '"cloudServersOpenStack")
+    (: lferax-services get-service-endpoints auth-response
+      '"cloudServersOpenStack")
 
 The full list of available endpoints is provided in
 ``(: lferax-consts services)``. We recommend using the ``dict`` provided there,
@@ -297,7 +298,7 @@ We provide some alias functions for commonly used service endpoints, e.g.:
 
 .. code:: common-lisp
 
-    (: lferax-services get-cloud-servers-v2-endpoints response)
+    (: lferax-services get-cloud-servers-v2-endpoints auth-response)
 
 
 Region Endpoint URL
@@ -307,7 +308,7 @@ Furthermore, you can get a service's URL by region:
 
 .. code:: common-lisp
 
-    (: lferax-services get-cloud-servers-v2-url response '"DFW")
+    (: lferax-services get-cloud-servers-v2-url auth-response '"DFW")
 
 A full list of regions that can be passed (as in "DFW" above) is
 provided in ``(: lferax-consts services)``.
@@ -318,11 +319,35 @@ the services above):
 .. code:: common-lisp
 
     (set region (: dict fetch 'dfw (: lferax-const regions)))
-    (: lferax-services get-cloud-servers-v2-url response region)
+    (: lferax-services get-cloud-servers-v2-url auth-response region)
 
 
 Cloud Servers
 =============
+
+For the conveneince of the reader, in the following examples, we will give each
+command needed to go from initial login to final result.
+
+(set auth-response (: lferax-identity login))
+(set token (: lferax-identity get-token auth-response))
+(set region (: dict fetch 'dfw (: lferax-const regions)))
+(set server-list (: lferax-services get-cloud-servers-v2-endpoints response))
+(: io format '"~p~n" (list server-list))
+
+
+
+Getting Flavors List
+--------------------
+
+.. code:: common-lisp
+
+  (set auth-response (: lferax-identity login))
+  (set token (: lferax-identity get-token auth-response))
+  (set region (: dict fetch 'dfw (: lferax-const regions)))
+  (set flavors-list (: lferax-servers get-flavors-list
+                      auth-response region token))
+  (: io format '"~p~n" (list flavors-list))
+
 
 
 Getting Image List
@@ -335,6 +360,14 @@ Creating a Server
 -----------------
 
 TBD
+
+
+Getting a List of Servers
+-------------------------
+
+.. code:: common-lisp
+
+    (: lferax-servers get-server-list response region token)
 
 
 Utility Functions
