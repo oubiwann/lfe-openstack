@@ -53,6 +53,9 @@ compile: get-deps clean-ebin
 	rebar compile
 	cd $(JIFFY_DIR) && rebar compile
 
+compile-only: clean-ebin
+	rebar compile skip_deps=true
+
 compile-tests: clean-eunit
 	mkdir -p $(TEST_OUT_DIR)
 	ERL_LIBS=$(ERL_LIBS) $(LFEC) -o $(TEST_OUT_DIR) $(TEST_DIR)/*_tests.lfe
@@ -65,6 +68,10 @@ clean: clean-ebin clean-eunit
 	rebar clean
 
 check: compile compile-tests
+	@clear;
+	@rebar eunit verbose=1 skip_deps=true
+
+check-only: compile-only compile-tests
 	@clear;
 	@rebar eunit verbose=1 skip_deps=true
 
