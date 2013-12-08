@@ -2,13 +2,19 @@
   (export all))
 
 
+(defun partition-list (list-data)
+  "This function takes lists of even length with an implicit key (atom) value
+  pairing and generates a list of two lists: one with all the keys, and the
+  other with all the values."
+  (: lists partition #'is_atom/1 list-data))
+
 (defun dict (data)
   "'data' is a list of implicit pairs:
     * the odd elements are keys of type 'atom'
     * the even elemnts are the values.
 
   This list is partitioned. zipped to tuples, and then converted to a dict."
-  (let (((tuple keys values) (: lists partition #'is_atom/1 data)))
+  (let (((tuple keys values) (partition-list data)))
     (: dict from_list
        (: lists zip keys values))))
 
@@ -18,6 +24,17 @@
 
 (defun json-wrap (data-1 data-2)
   (tuple (list data-1 data-2)))
+
+(defun json-wrap-2 (data)
+  (let* (((tuple keys values) (partition-list data))
+         (pairs (: lists zip keys values)))
+    (tuple pairs)))
+
+(defun json-wrap-bin (data)
+  (let* (((tuple keys values) (partition-list data))
+         (values (: lists map #'list_to_binary/1 values))
+         (pairs (: lists zip keys values)))
+    (tuple pairs)))
 
 (defun start-services ()
   (: inets start)

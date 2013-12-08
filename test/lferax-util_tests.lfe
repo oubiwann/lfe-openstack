@@ -15,22 +15,54 @@
           (assert-exit 2))))
 
 
-(defun test-dict-data ()
+(defun test-dict-data-1 ()
+  (list
+    'key-1 '"value 1"))
+
+(defun test-dict-data-2 ()
   (list
     'key-1 '"value 1"
     'key-2 '"value 2"))
 
-(defun test-dict-1 ()
-  (: lferax-util dict (test-dict-data)))
+(defun test-dict-data-3 ()
+  (list
+    'key-1 '"value 1"
+    'key-2 '"value 2"
+    'key-3 '"value 3"))
+
+(defun test-dict-2 ()
+  (: lferax-util dict (test-dict-data-2)))
+
+(defun partition-list_test ()
+  (let ((result (: lferax-util partition-list (test-dict-data-2))))
+    (assert-equal #((key-1 key-2) ("value 1" "value 2")) result)))
 
 (defun dict_test ()
-  (assert-equal '"value 1" `(: dict fetch 'key-1 ,(test-dict-1)))
-  (assert-equal '"value 2" `(: dict fetch 'key-2 ,(test-dict-1))))
+  (assert-equal '"value 1" `(: dict fetch 'key-1 ,(test-dict-2)))
+  (assert-equal '"value 2" `(: dict fetch 'key-2 ,(test-dict-2))))
 
 (defun json-wrap_test ()
-  (assert-equal #(("my data")) (: lferax-util json-wrap '"my data"))
-  (assert-equal #(("my data 1" "my data 2"))
-                (: lferax-util json-wrap '"my data 1" '"my data 2")))
+  (let ((result-1 (: lferax-util json-wrap-2 (test-dict-data-1)))
+        (result-2 (: lferax-util json-wrap-2 (test-dict-data-2)))
+        (result-3 (: lferax-util json-wrap-2 (test-dict-data-3))))
+    (assert-equal #((#(key-1 "value 1"))) result-1)
+    (assert-equal #((#(key-1 "value 1") #(key-2 "value 2"))) result-2)
+    (assert-equal #((#(key-1 "value 1") #(key-2 "value 2") #(key-3 "value 3")))
+                  result-3)))
+
+(defun json-wrap-bin_test ()
+  (let ((result-1 (: lferax-util json-wrap-bin (test-dict-data-1)))
+        (result-2 (: lferax-util json-wrap-bin (test-dict-data-2)))
+        (result-3 (: lferax-util json-wrap-bin (test-dict-data-3))))
+    (assert-equal #((#(key-1 #B(118 97 108 117 101 32 49))))
+                  result-1)
+    (assert-equal #((#(key-1 #B(118 97 108 117 101 32 49))
+                     #(key-2 #B(118 97 108 117 101 32 50))))
+                  result-2)
+    (assert-equal #((#(key-1 #B(118 97 108 117 101 32 49))
+                     #(key-2 #B(118 97 108 117 101 32 50))
+                     #(key-3 #B(118 97 108 117 101 32 51))))
+                  result-3)))
 
 (defun is-home-dir?_test ()
   (assert-not `(: lferax-util is-home-dir? '"~"))
