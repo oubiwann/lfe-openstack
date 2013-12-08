@@ -1,5 +1,11 @@
 (defmodule lferax-servers
-  (export all))
+  (export all)
+  (import
+    (from lferax-util
+          (json-wrap 1)
+          (json-wrap 2)
+          (json-wrap-2 1)
+          (json-wrap-bin 1))))
 
 
 (defun get-name-id (json-data)
@@ -47,6 +53,22 @@
              (: dict fetch
                 (list_to_binary image-name)
                 (: dict from_list images-list)))))
+
+(defun get-new-server-payload (server-name image-id flavor-id)
+  "Jiffy doesn't handle strings well for JSON, though it does handle binaries
+  well. As such, all strings should be converted to binary before being passed
+  to Jiffy."
+  (json-wrap
+    (tuple 'server
+      (json-wrap-bin (list 'name server-name
+                           'imageRef image-id
+                           'flavorRef flavor-id)))))
+
+(defun get-new-server-encoded-payload (server-name image-id flavor-id)
+  (binary_to_list
+    (: jiffy encode (get-new-server-payload server-name image-id flavor-id))))
+
+(defun create-server ())
 
 (defun get-server-list (identity-response region auth-token)
   (let ((base-url (: lferax-services get-cloud-servers-v2-url
