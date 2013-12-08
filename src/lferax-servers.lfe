@@ -8,22 +8,27 @@
     (tuple (: ej get #("name") json-data))
     (tuple (: ej get #("id") json-data))))
 
-(defun get-flavors-data (base-url region auth-token)
+(defun get-data (identity-response url-path region auth-token)
+  (let* ((base-url (: lferax-services get-cloud-servers-v2-url
+                     identity-response
+                     region))
+         (url (++ base-url url-path)))
   (: lferax-util get-json-body
-    (: lferax-http get
-       (++ base-url '"/flavors/detail")
-       region
-       auth-token)))
+    (: lferax-http get url region auth-token))))
 
 (defun get-flavors-list (identity-response region auth-token)
-  (let* ((base-url (: lferax-services get-cloud-servers-v2-url
-                      identity-response
-                      region)))
-    (: lists map
-       #'get-name-id/1
-       (: ej get
-          #("flavors")
-          (get-flavors-data base-url region auth-token)))))
+  (: lists map
+     #'get-name-id/1
+     (: ej get
+        #("flavors")
+        (get-data identity-response '"/flavors/detail" region auth-token))))
+
+(defun get-images-list (identity-response region auth-token)
+  (: lists map
+     #'get-name-id/1
+     (: ej get
+        #("images")
+        (get-data identity-response '"/images/detail" region auth-token))))
 
 (defun get-server-list (identity-response region auth-token)
   (let ((base-url (: lferax-services get-cloud-servers-v2-url
