@@ -341,6 +341,15 @@ Getting Flavors List
                         auth-response region token))
     (: io format '"~p~n" (list flavors-list))
 
+To get a particular flavor id from that list, you can use this convenience
+function:
+
+.. code:: common-lisp
+
+    (set flavor-id (: lferax-servers get-flavor-id
+                     '"30 GB Performance"
+                     flavors-list))
+
 
 Getting Images List
 -------------------
@@ -353,6 +362,15 @@ Getting Images List
     (set images-list (: lferax-servers get-images-list
                         auth-response region token))
     (: io format '"~p~n" (list images-list))
+
+To get a particular image id from that list, you can use this convenience
+function:
+
+.. code:: common-lisp
+
+    (set image-id (: lferax-servers get-image-id
+                    '"Ubuntu 12.04 LTS (Precise Pangolin)"
+                    images-list))
 
 
 Creating a Server
