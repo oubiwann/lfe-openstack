@@ -12,21 +12,26 @@
     (: ej get #("name") json-data)
     (tuple (: ej get #("id") json-data))))
 
-(defun get-data (identity-response url-path region auth-token)
+(defun get-data (identity-response url-path region)
   (let* ((base-url (: lferax-services get-cloud-servers-v2-url
                      identity-response
                      region))
          (url (++ base-url url-path)))
   (: lferax-util get-json-body
-    (: lferax-http get url region auth-token))))
+    (: lferax-http get
+       url
+       region
+       (: lferax-identity get-token identity-response)))))
 
 ; XXX refactor this (generalize/abtract for reuse)
-(defun get-flavors-list (identity-response region auth-token)
+(defun get-flavors-list (identity-response region)
   (: lists map
      #'get-name-id/1
      (: ej get
         #("flavors")
-        (get-data identity-response '"/flavors/detail" region auth-token))))
+        (get-data identity-response
+                  '"/flavors/detail"
+                  region))))
 
 ; XXX refactor this (generalize/abtract for reuse)
 (defun get-flavor-id (flavor-name flavors-list)
@@ -37,12 +42,14 @@
                 (: dict from_list flavors-list)))))
 
 ; XXX refactor this (generalize/abtract for reuse)
-(defun get-images-list (identity-response region auth-token)
+(defun get-images-list (identity-response region)
   (: lists map
      #'get-name-id/1
      (: ej get
         #("images")
-        (get-data identity-response '"/images/detail" region auth-token))))
+        (get-data identity-response
+                  '"/images/detail"
+                  region))))
 
 ; XXX refactor this (generalize/abtract for reuse)
 (defun get-image-id (image-name images-list)
@@ -75,11 +82,12 @@
       (get-new-server-encoded-payload server-name image-id flavor-id)
       (: lferax-identity get-token identity-response))))
 
-(defun get-server-list (identity-response region auth-token)
+(defun get-server-list (identity-response region)
   (let ((base-url (: lferax-services get-cloud-servers-v2-url
                      identity-response
                      region)))
     (: lferax-http get
       (++ base-url '"/servers/detail")
-      region auth-token)))
+      region
+      (: lferax-identity get-token identity-response))))
 

@@ -337,8 +337,7 @@ Getting Flavors List
     (set auth-response (: lferax-identity login))
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
-    (set flavors-list (: lferax-servers get-flavors-list
-                        auth-response region token))
+    (set flavors-list (: lferax-servers get-flavors-list auth-response region))
     (: io format '"~p~n" (list flavors-list))
 
 To get a particular flavor id from that list, you can use this convenience
@@ -359,8 +358,7 @@ Getting Images List
     (set auth-response (: lferax-identity login))
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
-    (set images-list (: lferax-servers get-images-list
-                        auth-response region token))
+    (set images-list (: lferax-servers get-images-list auth-response region))
     (: io format '"~p~n" (list images-list))
 
 To get a particular image id from that list, you can use this convenience
@@ -381,13 +379,11 @@ Creating a Server
     (set auth-response (: lferax-identity login))
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
-    (set flavors-list (: lferax-servers get-flavors-list
-                        auth-response region token))
+    (set flavors-list (: lferax-servers get-flavors-list auth-response region))
     (set flavor-id (: lferax-servers get-flavor-id
                      '"30 GB Performance"
                      flavors-list))
-    (set images-list (: lferax-servers get-images-list
-                        auth-response region token))
+    (set images-list (: lferax-servers get-images-list auth-response region))
     (set image-id (: lferax-servers get-image-id
                     '"Ubuntu 12.04 LTS (Precise Pangolin)"
                     images-list))
