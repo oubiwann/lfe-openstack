@@ -328,38 +328,39 @@ Cloud Servers
 For the conveneince of the reader, in the following examples, we will give each
 command needed to go from initial login to final result.
 
-(set auth-response (: lferax-identity login))
-(set token (: lferax-identity get-token auth-response))
-(set region (: dict fetch 'dfw (: lferax-const regions)))
-(set server-list (: lferax-services get-cloud-servers-v2-endpoints response))
-(: io format '"~p~n" (list server-list))
-
-
 
 Getting Flavors List
 --------------------
 
 .. code:: common-lisp
 
-  (set auth-response (: lferax-identity login))
-  (set token (: lferax-identity get-token auth-response))
-  (set region (: dict fetch 'dfw (: lferax-const regions)))
-  (set flavors-list (: lferax-servers get-flavors-list
-                      auth-response region token))
-  (: io format '"~p~n" (list flavors-list))
+    (set auth-response (: lferax-identity login))
+    (set token (: lferax-identity get-token auth-response))
+    (set region (: dict fetch 'dfw (: lferax-const regions)))
+    (set flavors-list (: lferax-servers get-flavors-list
+                        auth-response region token))
+    (: io format '"~p~n" (list flavors-list))
 
 
+Getting Images List
+-------------------
 
-Getting Image List
-------------------
+.. code:: common-lisp
 
-TBD
+    (set auth-response (: lferax-identity login))
+    (set token (: lferax-identity get-token auth-response))
+    (set region (: dict fetch 'dfw (: lferax-const regions)))
+    (set images-list (: lferax-servers get-images-list
+                        auth-response region token))
+    (: io format '"~p~n" (list images-list))
 
 
 Creating a Server
 -----------------
 
-TBD
+.. code:: common-lisp
+
+
 
 
 Getting a List of Servers
@@ -367,7 +368,12 @@ Getting a List of Servers
 
 .. code:: common-lisp
 
-    (: lferax-servers get-server-list response region token)
+
+    (set auth-response (: lferax-identity login))
+    (set token (: lferax-identity get-token auth-response))
+    (set region (: dict fetch 'dfw (: lferax-const regions)))
+    (set server-list (: lferax-servers get-server-list response region token))
+    (: io format '"~p~n" (list server-list))
 
 
 Utility Functions
