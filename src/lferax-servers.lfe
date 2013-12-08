@@ -66,7 +66,14 @@
   (binary_to_list
     (: jiffy encode (get-new-server-payload server-name image-id flavor-id))))
 
-(defun create-server ())
+(defun create-server (identity-response region server-name image-id flavor-id)
+  (let ((base-url (: lferax-services get-cloud-servers-v2-url
+                     identity-response
+                     region)))
+    (: lferax-http post
+      (++ base-url '"/servers")
+      (get-new-server-encoded-payload server-name image-id flavor-id)
+      (: lferax-identity get-token identity-response))))
 
 (defun get-server-list (identity-response region auth-token)
   (let ((base-url (: lferax-services get-cloud-servers-v2-url

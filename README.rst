@@ -378,8 +378,25 @@ Creating a Server
 
 .. code:: common-lisp
 
-
-
+    (set auth-response (: lferax-identity login))
+    (set token (: lferax-identity get-token auth-response))
+    (set region (: dict fetch 'dfw (: lferax-const regions)))
+    (set flavors-list (: lferax-servers get-flavors-list
+                        auth-response region token))
+    (set flavor-id (: lferax-servers get-flavor-id
+                     '"30 GB Performance"
+                     flavors-list))
+    (set images-list (: lferax-servers get-images-list
+                        auth-response region token))
+    (set image-id (: lferax-servers get-image-id
+                    '"Ubuntu 12.04 LTS (Precise Pangolin)"
+                    images-list))
+    (set server-response (: lferax-servers create-server
+                           auth-response
+                           region
+                           '"proj-server-1"
+                           image-id
+                           flavor-id))
 
 Getting a List of Servers
 -------------------------
