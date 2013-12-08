@@ -100,29 +100,29 @@
   (cond ((=:= mode 'apikey) (login))
         ('true (login (get-username) 'password (get-password)))))
 
-(defun get-token (response)
+(defun get-token (identity-response)
   (binary_to_list
     (: ej get
        #("access" "token" "id")
-       (: lferax-util get-json-body response))))
+       (: lferax-util get-json-body identity-response))))
 
-(defun get-tenant-id (response)
+(defun get-tenant-id (identity-response)
   (binary_to_list
     (: ej get
        #("access" "token" "tenant" "id")
-       (: lferax-util get-json-body response))))
+       (: lferax-util get-json-body identity-response))))
 
-(defun get-user-id (response)
+(defun get-user-id (identity-response)
   (binary_to_list
     (: ej get
        #("access" "user" "id")
-       (: lferax-util get-json-body response))))
+       (: lferax-util get-json-body identity-response))))
 
-(defun get-user-name (response)
+(defun get-user-name (identity-response)
   (binary_to_list
     (: ej get
        #("access" "user" "name")
-       (: lferax-util get-json-body response))))
+       (: lferax-util get-json-body identity-response))))
 
 
 
