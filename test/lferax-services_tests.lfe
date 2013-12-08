@@ -18,3 +18,4 @@
           (get-password-auth-payload 2)
           (get-apikey-auth-payload 2))))
 
+(defun noop ())
