@@ -334,9 +334,11 @@ Getting Flavors List
 
 .. code:: common-lisp
 
+    ; function calls from before
     (set auth-response (: lferax-identity login))
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
+    ; new calls
     (set flavors-list (: lferax-servers get-flavors-list auth-response region))
     (: io format '"~p~n" (list flavors-list))
 
@@ -353,9 +355,11 @@ Getting Images List
 
 .. code:: common-lisp
 
+    ; function calls from before
     (set auth-response (: lferax-identity login))
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
+    ; new call
     (set images-list (: lferax-servers get-images-list auth-response region))
     (: io format '"~p~n" (list images-list))
 
@@ -374,6 +378,7 @@ Creating a Server
 
 .. code:: common-lisp
 
+    ; function calls from before
     (set auth-response (: lferax-identity login))
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
@@ -385,6 +390,7 @@ Creating a Server
     (set image-id (: lferax-servers get-image-id
                     '"Ubuntu 12.04 LTS (Precise Pangolin)"
                     images-list))
+    ; new call
     (set server-response (: lferax-servers create-server
                            auth-response
                            region
@@ -397,10 +403,11 @@ Getting a List of Servers
 
 .. code:: common-lisp
 
-
+    ; function calls from before
     (set auth-response (: lferax-identity login))
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
+    ; new call
     (set server-list (: lferax-servers get-server-list response region token))
     (: io format '"~p~n" (list server-list))
 
