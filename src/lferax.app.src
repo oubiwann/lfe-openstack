@@ -5,7 +5,7 @@
   {description, "Pure LFE language bindings for the Rackspace Cloud"},
 
   %% The version of the application
-  {vsn, "0.0.1"},
+  {vsn, "0.0.1-alpha"},
 
   %% All modules used by the application.
   {modules,
