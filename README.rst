@@ -209,7 +209,7 @@ With the response data from a successful login, one may then get one's token:
 Tentant ID
 ----------
 
-TThe tenant ID is an important bit of information that you will need for
+The tenant ID is an important bit of information that you will need for
 further calls to the Rackspace Cloud APIs. You get it in the same manner:
 
 
@@ -347,7 +347,7 @@ function:
 
 .. code:: common-lisp
 
-    (set flavor-id (: lferax-servers get-id '"30 GB Performance"flavors-list))
+    (set flavor-id (: lferax-servers get-id '"30 GB Performance" flavors-list))
 
 
 Getting Images List
