@@ -22,15 +22,20 @@
        url
        (: lferax-identity get-token identity-response)))))
 
-; XXX refactor this (generalize/abtract for reuse)
-(defun get-flavors-list (identity-response region)
+(defun get-list (identity-response region type)
   (: lists map
      #'get-name-id/1
      (: ej get
-        #("flavors")
+        (tuple type)
         (get-data identity-response
-                  '"/flavors"
+                  (++ '"/" type)
                   region))))
+
+(defun get-flavors-list (identity-response region)
+  (get-list identity-response region '"flavors"))
+
+(defun get-images-list (identity-response region)
+  (get-list identity-response region '"images"))
 
 ; XXX refactor this (generalize/abtract for reuse)
 (defun get-flavor-id (flavor-name flavors-list)
@@ -39,16 +44,6 @@
              (: dict fetch
                 (list_to_binary flavor-name)
                 (: dict from_list flavors-list)))))
-
-; XXX refactor this (generalize/abtract for reuse)
-(defun get-images-list (identity-response region)
-  (: lists map
-     #'get-name-id/1
-     (: ej get
-        #("images")
-        (get-data identity-response
-                  '"/images"
-                  region))))
 
 ; XXX refactor this (generalize/abtract for reuse)
 (defun get-image-id (image-name images-list)
