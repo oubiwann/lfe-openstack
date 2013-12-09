@@ -42,7 +42,7 @@
   (assert-equal
     '"ORD"
     `(: dict fetch 'ord (: lferax-const regions)))
-  (assert-equal 4 (: dict size (: lferax-const regions))))
+  (assert-equal 5 (: dict size (: lferax-const regions))))
 
 (defun files_test ()
   (assert-equal '"~/.rax/username" `(: lferax-const username-file))
