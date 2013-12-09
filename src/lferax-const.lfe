@@ -57,4 +57,5 @@
       'syd '"SYD"
       'dfw '"DFW"
       'ord '"ORD"
+      'hkg '"HKG"
       'iad '"IAD")))
