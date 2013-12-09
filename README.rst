@@ -390,11 +390,12 @@ Creating a Server
     (set image-id (: lferax-servers get-image-id
                     '"Ubuntu 12.04 LTS (Precise Pangolin)"
                     images-list))
-    ; new call
+    ; new calls
+    (set server-name '"proj-server-1")
     (set server-response (: lferax-servers create-server
                            auth-response
                            region
-                           '"proj-server-1"
+                           server-name
                            image-id
                            flavor-id))
 
