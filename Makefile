@@ -1,4 +1,6 @@
 DEPS = ./deps
+BIN_DIR=./bin
+EXPM=$(BIN_DIR)/expm
 PROJECT=lfe-rackspace
 LIB=lferax
 EBIN=ebin
@@ -22,12 +24,16 @@ TEST_OUT_DIR = ./.eunit
 FINISH=-run init stop -noshell
 
 get-version:
+	@echo
+	@echo -n app.src: ''
 	@erl -eval 'io:format("~p~n", [ \
 		proplists:get_value(vsn,element(3,element(2,hd(element(3, \
 		erl_eval:exprs(element(2, erl_parse:parse_exprs(element(2, \
 		erl_scan:string("Data = " ++ binary_to_list(element(2, \
 		file:read_file("src/$(LIB).app.src"))))))), []))))))])' \
 		$(FINISH)
+	@echo -n package.exs: ''
+	@grep version package.exs |awk '{print $$2}'|sed -e 's/,//g'
 
 # Note that this make target expects to be used like so:
 #	$ ERL_LIB=some/path make get-install-dir
@@ -38,7 +44,14 @@ get-version:
 get-install-dir:
 	@echo $(ERL_LIB)/$(PROJECT)-$(shell make get-version)
 
-get-deps:
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+
+$(EXPM): $(BIN_DIR)
+	curl -o $(EXPM) http://expm.co/__download__/expm
+	chmod +x $(EXPM)
+
+get-deps: $(EXPM)
 	rebar get-deps
 	for DIR in $(wildcard $(DEPS)/*); do cd $$DIR; git pull; cd - ; done
 	mkdir -p $(CONFIG_DIR)
@@ -95,3 +108,6 @@ install: compile
 		echo "ERROR: No 'ERL_LIB' value is set in the env." \
 		&& exit 1; \
 	fi
+
+upload:
+	$(EXPM) publish
