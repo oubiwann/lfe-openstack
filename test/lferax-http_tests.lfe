@@ -34,7 +34,7 @@
   (: meck new 'httpc)
   (: meck expect 'httpc 'request 4 (: lferax-testing-payloads simple-success))
   (try
-    (let* ((raw-result (: lferax-http get '"http://my-url" '"" '""))
+    (let* ((raw-result (: lferax-http get '"http://my-url" '""))
            (result (list_to_binary (: lferax-util get-body raw-result))))
       (assert-equal '"<html><body>Yay!</body></html>"
                     `(binary_to_list ,result)))
