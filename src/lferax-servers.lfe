@@ -20,7 +20,6 @@
   (: lferax-util get-json-body
     (: lferax-http get
        url
-       region
        (: lferax-identity get-token identity-response)))))
 
 ; XXX refactor this (generalize/abtract for reuse)
@@ -30,7 +29,7 @@
      (: ej get
         #("flavors")
         (get-data identity-response
-                  '"/flavors/detail"
+                  '"/flavors"
                   region))))
 
 ; XXX refactor this (generalize/abtract for reuse)
@@ -48,7 +47,7 @@
      (: ej get
         #("images")
         (get-data identity-response
-                  '"/images/detail"
+                  '"/images"
                   region))))
 
 ; XXX refactor this (generalize/abtract for reuse)
@@ -75,8 +74,8 @@
 
 (defun create-server (identity-response region server-name image-id flavor-id)
   (let ((base-url (: lferax-services get-cloud-servers-v2-url
-                     identity-response
-                     region)))
+                    identity-response
+                    region)))
     (: lferax-http post
       (++ base-url '"/servers")
       (get-new-server-encoded-payload server-name image-id flavor-id)
