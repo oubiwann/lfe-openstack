@@ -345,9 +345,7 @@ function:
 
 .. code:: common-lisp
 
-    (set flavor-id (: lferax-servers get-flavor-id
-                     '"30 GB Performance"
-                     flavors-list))
+    (set flavor-id (: lferax-servers get-id '"30 GB Performance"flavors-list))
 
 
 Getting Images List
@@ -366,7 +364,7 @@ function:
 
 .. code:: common-lisp
 
-    (set image-id (: lferax-servers get-image-id
+    (set image-id (: lferax-servers get-id
                     '"Ubuntu 12.04 LTS (Precise Pangolin)"
                     images-list))
 

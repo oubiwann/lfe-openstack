@@ -37,21 +37,12 @@
 (defun get-images-list (identity-response region)
   (get-list identity-response region '"images"))
 
-; XXX refactor this (generalize/abtract for reuse)
-(defun get-flavor-id (flavor-name flavors-list)
+(defun get-id (name data-list)
   (binary_to_list
     (element 1
              (: dict fetch
-                (list_to_binary flavor-name)
-                (: dict from_list flavors-list)))))
-
-; XXX refactor this (generalize/abtract for reuse)
-(defun get-image-id (image-name images-list)
-  (binary_to_list
-    (element 1
-             (: dict fetch
-                (list_to_binary image-name)
-                (: dict from_list images-list)))))
+                (list_to_binary name)
+                (: dict from_list data-list)))))
 
 (defun get-new-server-payload (server-name image-id flavor-id)
   "Jiffy doesn't handle strings well for JSON, though it does handle binaries
