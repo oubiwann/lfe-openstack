@@ -15,6 +15,20 @@
           (assert-exit 2))))
 
 
+(defun get-default-headers_test()
+  (let* ((result (: lferax-http get-default-headers '"my-content-type"))
+         (data-check (list_to_binary (element 2 (car result))))
+         (count (length result)))
+    (assert-equal '"my-content-type" `(binary_to_list ,data-check))
+    (assert-equal 2 count)))
+
+(defun get-auth-headers_test()
+  (let* ((result (: lferax-http get-auth-headers '"my-content-type" '"abc-tk"))
+         (data-check (list_to_binary (element 2 (: lists last result))))
+         (count (length result)))
+    (assert-equal '"abc-tk" `(binary_to_list ,data-check))
+    (assert-equal 3 count)))
+
 (defun get_test ()
   (: inets start)
   (: meck new 'httpc)
