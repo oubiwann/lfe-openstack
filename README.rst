@@ -409,7 +409,7 @@ Getting a List of Servers
     (set token (: lferax-identity get-token auth-response))
     (set region (: dict fetch 'dfw (: lferax-const regions)))
     ; new call
-    (set server-list (: lferax-servers get-server-list response region token))
+    (set server-list (: lferax-servers get-server-list auth-response region))
     (: io format '"~p~n" (list server-list))
 
 
