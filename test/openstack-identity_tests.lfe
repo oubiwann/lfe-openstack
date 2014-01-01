@@ -33,8 +33,6 @@
     (: lfe-utils dump-data '"passwd-data" data)
     (assert-equal expected data)))
 
-;{\"auth\":{\"passwordCredentials\":{\"username\":\"alice\",\"password\":\"asecret\"}}}
-
 ; XXX this unit test is currently broken
 (defun get-apikey-auth-payload_test_skip ()
   (let ((data (get-apikey-auth-payload '"alice" '"123abc"))
@@ -42,4 +40,3 @@
     (: lfe-utils dump-data '"apikey-data" (: io_lib format '"~s~n" (list data)))
     (assert-equal expected data)))
 
-;{\"auth\":{\"RAX-KSKEY:apiKeyCredentials\":{\"username\":\"alice\",\"apikey\":\"123abc\"}}}
