@@ -15,41 +15,26 @@
           (assert-exit 2))))
 
 
-(defun auth-url_test ()
-  (assert-equal
-    '"https://identity.api.rackspacecloud.com/v2.0/tokens"
-    '(: openstack-const auth-url)))
-
 (defun services_test ()
   (assert-equal
-    '"cloudServers"
-    `(: dict fetch 'servers-v1 (: openstack-const services)))
+    '""
+    `(: dict fetch 'identity (: openstack-const services)))
   (assert-equal
-    '"cloudServersOpenStack"
-    `(: dict fetch 'servers-v2 (: openstack-const services)))
+    '""
+    `(: dict fetch 'compute (: openstack-const services)))
   (assert-equal
-    '"cloudLoadBalancers"
-    `(: dict fetch 'load-balancers (: openstack-const services)))
-  (assert-equal 10 (: dict size (: openstack-const services))))
-
-(defun regions_test ()
-  (assert-equal
-    '"SYD"
-    `(: dict fetch 'syd (: openstack-const regions)))
-  (assert-equal
-    '"DFW"
-    `(: dict fetch 'dfw (: openstack-const regions)))
-  (assert-equal
-    '"ORD"
-    `(: dict fetch 'ord (: openstack-const regions)))
-  (assert-equal 5 (: dict size (: openstack-const regions))))
+    '""
+    `(: dict fetch 'networking (: openstack-const services)))
+  (assert-equal 8 (: dict size (: openstack-const services))))
 
 (defun files_test ()
-  (assert-equal '"~/.rax/username" `(: openstack-const username-file))
-  (assert-equal '"~/.rax/password" `(: openstack-const password-file))
-  (assert-equal '"~/.rax/apikey" `(: openstack-const apikey-file)))
+  (assert-equal '"~/.openstack/username" `(: openstack-const username-file))
+  (assert-equal '"~/.openstack/password" `(: openstack-const password-file))
+  (assert-equal '"~/.openstack/tenant" `(: openstack-const tenant-file))
+  (assert-equal '"~/.openstack/auth-url" `(: openstack-const auth-url-file)))
 
 (defun env_test ()
-  (assert-equal '"RAX_USERNAME" `(: openstack-const username-env))
-  (assert-equal '"RAX_PASSWORD" `(: openstack-const password-env))
-  (assert-equal '"RAX_APIKEY" `(: openstack-const apikey-env)))
+  (assert-equal '"OS_USERNAME" `(: openstack-const username-env))
+  (assert-equal '"OS_PASSWORD" `(: openstack-const password-env))
+  (assert-equal '"OS_TENANT_NAME" `(: openstack-const tenant-env))
+  (assert-equal '"OS_AUTH_URL" `(: openstack-const auth-url-env)))

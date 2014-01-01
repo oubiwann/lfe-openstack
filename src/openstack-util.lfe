@@ -2,6 +2,7 @@
   (export all))
 
 
+; XXX these two should probably be moved into lfe-utils ...
 (defun partition-list (list-data)
   "This function takes lists of even length with an implicit key (atom) value
   pairing and generates a list of two lists: one with all the keys, and the
