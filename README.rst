@@ -71,25 +71,30 @@ Which should give you output something like the following:
     ==> lfe-openstack (eunit)
     ======================== EUnit ========================
     module 'openstack-util_tests'
-      openstack-util_tests: dict_test...[0.085 s] ok
+      openstack-util_tests: partition-list_test...[0.037 s] ok
+      openstack-util_tests: dict_test...ok
       openstack-util_tests: json-wrap_test...ok
+      openstack-util_tests: json-wrap-bin_test...ok
       openstack-util_tests: is-home-dir?_test...ok
       openstack-util_tests: expand-home-dir_test...ok
       openstack-util_tests: strip_test...ok
-      [done in 0.100 s]
-    module 'openstack-identity_tests'
-      openstack-identity_tests: build-creds-password_test...[0.046 s] ok
-      openstack-identity_tests: build-creds-apikey_test...ok
-      [done in 0.051 s]
+      [done in 0.058 s]
+    module 'openstack-services_tests'
+    openstack-servers_tests: get-new-server-payload_test (module 'openstack-servers_tests')...[0.020 s] ok
+    openstack-identity_tests: build-creds-password_test (module 'openstack-identity_tests')...[0.019 s] ok
+    module 'openstack-http_tests'
+      openstack-http_tests: get-default-headers_test...[0.030 s] ok
+      openstack-http_tests: get-auth-headers_test...ok
+      openstack-http_tests: get_test...[1.306 s] ok
+      [done in 1.345 s]
     module 'openstack-const_tests'
-      openstack-const_tests: auth-url_test...[0.052 s] ok
       openstack-const_tests: services_test...ok
-      openstack-const_tests: regions_test...ok
       openstack-const_tests: files_test...ok
-      openstack-const_tests: env_test...ok
-      [done in 0.067 s]
+      openstack-const_tests: env_test...
+      openstack-const_tests: config_test...ok
+      [done in 0.012 s]
     =======================================================
-      All 12 tests passed.
+      All 16 tests passed.
 
 
 Usage
@@ -112,20 +117,15 @@ Directly, using ``login/3``
         '"alice"
         '"secretpwd")
 
-or
-
-.. code:: common-lisp
-
-    > (: openstack-identity login '"alice" 'password `"asecret")
-
 
 Indirectly, using ``login/2``
 -----------------------------
 
 To use this login method, you'll need to have the ``~/.openstack/providers.cfg``
-file created, with content similar to the following:
+file created, with content for each provider you want to be able to use. For
+example:
 
-.. code::
+.. code:: ini
 
   [openstack-host]
   username=alice
@@ -147,6 +147,8 @@ With your providers config file set up, you can then do the following:
 
 or
 
+.. code:: common-lisp
+
     > (: openstack-identity login 'provider '"trystack")
 
 and the appropriate configuration data will be read from that file.
@@ -163,10 +165,6 @@ without any parameters:
     $ export OS_USERNAME=alice
     $ export OS_PASSWORD=secretpwd
     $ export OS_AUTH_URL=http://api.openstack.host:5000/v2.0/tokens
-
-.. code:: common-lisp
-
-    > (: openstack-identity login)
 
 or
 
