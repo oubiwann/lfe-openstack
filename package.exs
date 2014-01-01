@@ -1,8 +1,8 @@
-Expm.Package.new(name: "lfe-rackspace",
-                 description: "Pure LFE language bindings for the Rackspace Cloud",
+Expm.Package.new(name: "lfe-openstack",
+                 description: "Pure LFE language bindings for OpenStack Clouds",
                  version: "0.0.1-alpha",
-                 keywords: ["LFE", "Lisp", "Rackspace", "OpenStack", "Cloud",
-                            "Library", "API", "Compute"],
+                 keywords: ["LFE", "Lisp", "OpenStack", "Cloud", "Library",
+                            "API", "Compute"],
                  maintainers: [[name: "Duncan McGreggor",
                                 email: "oubiwann@cogitat.io"]],
-                 repositories: [[github: "oubiwann/lfe-rackspace"]])
+                 repositories: [[github: "oubiwann/lfe-openstack"]])

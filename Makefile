@@ -1,11 +1,11 @@
 DEPS = ./deps
 BIN_DIR=./bin
 EXPM=$(BIN_DIR)/expm
-PROJECT=lfe-rackspace
-LIB=lferax
+PROJECT=lfe-openstack
+LIB=openstack
 EBIN=ebin
 SRC=src
-CONFIG_DIR = ~/.rax
+CONFIG_DIR = ~/.openstack
 LFE_DIR = $(DEPS)/lfe
 LFE_EBIN = $(LFE_DIR)/ebin
 LFE = $(LFE_DIR)/bin/lfe
@@ -39,7 +39,7 @@ get-version:
 #	$ ERL_LIB=some/path make get-install-dir
 #
 # Which would give the following result:
-#	some/path/lfe-rackspace-1.0.0
+#	some/path/lfe-openstack-1.0.0
 #
 get-install-dir:
 	@echo $(ERL_LIB)/$(PROJECT)-$(shell make get-version)
