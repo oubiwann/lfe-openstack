@@ -33,6 +33,7 @@ directory of this project when you run ``make deps``:
 
 * `LFE`_ (Lisp Flavored Erlang; needed only to compile)
 * `Jiffy`_ (JSON-parsing library)
+* `econfig`_ (Erlang config/ini parser)
 * `lfeunit`_ (needed only to run the unit tests)
 * `lfe-utils`_ (various convenience functions)
 
@@ -441,5 +442,6 @@ TBD
 .. _rebar: https://github.com/rebar/rebar
 .. _LFE: https://github.com/rvirding/lfe
 .. _Jiffy: https://github.com/davisp/jiffy
+.. _econfig: https://github.com/benoitc/econfig
 .. _lfeunit: https://github.com/lfe/lfeunit
 .. _lfe-utils: https://github.com/lfe/lfe-utils
