@@ -56,30 +56,4 @@
                      #(key-3 #B(118 97 108 117 101 32 51))))
                   result-3)))
 
-(defun is-home-dir?_test ()
-  (assert-not `(: openstack-util is-home-dir? '"~"))
-  (assert-not `(: openstack-util is-home-dir? '"/"))
-  (assert-not `(: openstack-util is-home-dir? '"~home/"))
-  (assert-not `(: openstack-util is-home-dir? '"/home"))
-  (assert `(: openstack-util is-home-dir? '"~/"))
-  (assert `(: openstack-util is-home-dir? '"~/user"))
-  (assert `(: openstack-util is-home-dir? '"~/user/more/path")))
 
-(defun expand-home-dir_test ()
-  (assert-equal '"/usr/local/bin"
-                `(: openstack-util expand-home-dir '"/usr/local/bin"))
-  (assert-equal '"/home/oubiwann"
-                `(: openstack-util expand-home-dir '"/home/oubiwann"))
-  ;; lfeunit has some issues with the following tests...
-  ;(let* ((tilde-dir '"~/my-data")
-  ;       (expanded (: openstack-util expand-home-dir tilde-dir)))
-  ;  (assert `(: openstack-util is-home-dir? ,tilde-dir))
-  ;  (assert-not `(: openstack-util is-home-dir? ,expanded)))
-  )
-
-(defun strip_test ()
-  (assert-equal '"data" `(: openstack-util strip '"data\n"))
-  (assert-equal '"data" `(: openstack-util strip '"data\n\n"))
-  (assert-equal '"data" `(: openstack-util strip '"data   "))
-  (assert-equal '"data" `(: openstack-util strip '"data   \n   "))
-  (assert-equal '"data" `(: openstack-util strip '"data   \n   \n")))

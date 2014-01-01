@@ -22,33 +22,10 @@
   (: inets start)
   (: ssl start))
 
-; XXX move the next 4 funcs into lfe-utils
-(defun get-home-dir ()
-  (let (((list (tuple 'home (list home)))
-         (: lists sublist (: init get_arguments) 3 1)))
-    home))
-
-(defun is-home-dir? (path)
-  (cond ((=:= '"~/" (: string substr path 1 2))
-         'true)
-        ('true 'false)))
-
-(defun expand-home-dir (path-with-home)
-  (cond ((is-home-dir? path-with-home)
-         (: filename join (list (get-home-dir)
-                                (: string substr path-with-home 3))))
-        ('true path-with-home)))
-
-(defun strip (string)
-  (: re replace
-     string
-     '"(^\\s+)|(\\s+$)"
-      ""
-      (list 'global (tuple 'return 'list))))
-
 (defun read-file (filename)
-  (let (((tuple 'ok data) (: file read_file (expand-home-dir filename))))
-    (strip (binary_to_list data))))
+  (let* ((full-path (: lfe-utils expand-home-dir filename))
+         ((tuple 'ok data) (: file read_file full-path)))
+    (: lfe-utils strip (binary_to_list data))))
 
 (defun parse-response-ok (response)
   (let (((tuple erlang-ok-status

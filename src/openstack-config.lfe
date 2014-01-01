@@ -5,7 +5,7 @@
   (: application start 'gproc)
   (: application start 'econfig)
   (: econfig open_config 'os-config
-    (: openstack-util expand-home-dir (: openstack-const config-file))))
+    (: lfe-utils expand-home-dir (: openstack-const config-file))))
 
 (defun get-value (section key)
   (open)
