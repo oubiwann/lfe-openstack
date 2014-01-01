@@ -14,9 +14,12 @@ LFE_UTILS_DIR = $(DEPS)/lfe-utils
 LFEUNIT_DIR = $(DEPS)/lfeunit
 JIFFY_DIR = $(DEPS)/jiffy
 EJ_DIR = $(DEPS)/ej
+GPROC_DIR = $(DEPS)/gproc
+ECONFIG_DIR = $(DEPS)/econfig
 # Note that ERL_LIBS is for running this project in development and that
 # ERL_LIB is for installation.
-ERL_LIBS = $(LFE_DIR):$(LFE_UTILS_DIR):$(LFEUNIT_DIR):$(JIFFY_DIR):$(EJ_DIR):./
+ERL_LIBS1 = $(LFE_DIR):$(LFE_UTILS_DIR):$(LFEUNIT_DIR):$(JIFFY_DIR):$(EJ_DIR)
+ERL_LIBS = $(ERL_LIBS1):$(ECONFIG_DIR):$(GPROC_DIR):./
 SOURCE_DIR = ./src
 OUT_DIR = ./ebin
 TEST_DIR = ./test
