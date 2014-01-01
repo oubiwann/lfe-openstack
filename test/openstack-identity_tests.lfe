@@ -1,4 +1,4 @@
-(defmodule lferax-identity_tests
+(defmodule openstack-identity_tests
   (export all)
   (import
     (from lfeunit-util
@@ -13,7 +13,7 @@
           (assert-error 2)
           (assert-throw 2)
           (assert-exit 2))
-    (from lferax-identity
+    (from openstack-identity
           (build-creds 3)
           (get-password-auth-payload 2)
           (get-apikey-auth-payload 2))))

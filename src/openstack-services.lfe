@@ -1,11 +1,11 @@
-(defmodule lferax-services
+(defmodule openstack-services
   (export all))
 
 
 (defun get-service-catalog (identity-response)
   (: ej get
      #("access" "serviceCatalog")
-     (: lferax-util get-json-body identity-response)))
+     (: openstack-util get-json-body identity-response)))
 
 (defun get-service-endpoints (identity-response service-type)
   (: ej get
@@ -13,7 +13,7 @@
     (get-service-catalog identity-response)))
 
 (defun get-cloud-servers-v2-endpoints (identity-response)
-  (let ((servers-v2 (: dict fetch 'servers-v2 (: lferax-const services))))
+  (let ((servers-v2 (: dict fetch 'servers-v2 (: openstack-const services))))
     (get-service-endpoints identity-response servers-v2)))
 
 (defun get-cloud-servers-v2-url (identity-response region)

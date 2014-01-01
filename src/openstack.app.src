@@ -1,8 +1,8 @@
 %% -*- erlang -*-
-{application, 'lferax',
+{application, 'openstack',
  [
   %% A quick description of the application.
-  {description, "Pure LFE language bindings for the Rackspace Cloud"},
+  {description, "Pure LFE language bindings for OpenStack Clouds"},
 
   %% The version of the application
   {vsn, "0.0.1-alpha"},
@@ -10,7 +10,7 @@
   %% All modules used by the application.
   {modules,
    [
-    'lferax'
+    'openstack'
    ]},
 
   %% All of the registered names the application uses. This can be ignored.

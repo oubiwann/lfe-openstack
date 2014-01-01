@@ -1,4 +1,4 @@
-(defmodule lferax-servers_tests
+(defmodule openstack-servers_tests
   (export all)
   (import
     (from lfeunit-util
@@ -13,7 +13,7 @@
           (assert-error 2)
           (assert-throw 2)
           (assert-exit 2))
-    (from lferax-servers
+    (from openstack-servers
           (get-name-id 1)
           (get-flavor-id 2)
           (get-images-id 2)

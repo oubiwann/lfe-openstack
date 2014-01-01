@@ -1,7 +1,7 @@
-(defmodule lferax-identity
+(defmodule openstack-identity
   (export all)
   (import
-    (from lferax-util
+    (from openstack-util
           (json-wrap 1)
           (json-wrap-bin 1))))
 
@@ -36,32 +36,32 @@
   ((username 'password password) (get-password-auth-payload username password)))
 
 (defun password-login (username password)
-  (: lferax-http post
-    (: lferax-const auth-url)
+  (: openstack-http post
+    (: openstack-const auth-url)
     (get-auth-payload username 'password password)))
 
 (defun apikey-login (username apikey)
-  (: lferax-http post
-    (: lferax-const auth-url)
+  (: openstack-http post
+    (: openstack-const auth-url)
     (get-auth-payload username 'apikey apikey)))
 
 (defun get-disk-username ()
-  (: lferax-util read-file (: lferax-const username-file)))
+  (: openstack-util read-file (: openstack-const username-file)))
 
 (defun get-disk-password ()
-  (: lferax-util read-file (: lferax-const password-file)))
+  (: openstack-util read-file (: openstack-const password-file)))
 
 (defun get-disk-apikey ()
-  (: lferax-util read-file (: lferax-const apikey-file)))
+  (: openstack-util read-file (: openstack-const apikey-file)))
 
 (defun get-env-username ()
-  (: os getenv (: lferax-const username-env)))
+  (: os getenv (: openstack-const username-env)))
 
 (defun get-env-password ()
-  (: os getenv (: lferax-const password-env)))
+  (: os getenv (: openstack-const password-env)))
 
 (defun get-env-apikey ()
-  (: os getenv (: lferax-const apikey-env)))
+  (: os getenv (: openstack-const apikey-env)))
 
 (defun get-username ()
   (let ((username (get-env-username)))
@@ -104,25 +104,25 @@
   (binary_to_list
     (: ej get
        #("access" "token" "id")
-       (: lferax-util get-json-body identity-response))))
+       (: openstack-util get-json-body identity-response))))
 
 (defun get-tenant-id (identity-response)
   (binary_to_list
     (: ej get
        #("access" "token" "tenant" "id")
-       (: lferax-util get-json-body identity-response))))
+       (: openstack-util get-json-body identity-response))))
 
 (defun get-user-id (identity-response)
   (binary_to_list
     (: ej get
        #("access" "user" "id")
-       (: lferax-util get-json-body identity-response))))
+       (: openstack-util get-json-body identity-response))))
 
 (defun get-user-name (identity-response)
   (binary_to_list
     (: ej get
        #("access" "user" "name")
-       (: lferax-util get-json-body identity-response))))
+       (: openstack-util get-json-body identity-response))))
 
 
 

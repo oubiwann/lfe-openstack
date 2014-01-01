@@ -1,20 +1,20 @@
-(defmodule lferax-http
+(defmodule openstack-http
   (export all))
 
 
 (defun get-default-headers (content-type)
-  (list (tuple (: lferax-const content-type)
+  (list (tuple (: openstack-const content-type)
                content-type)
-        (tuple (: lferax-const user-agent)
-               (: lferax-const user-agent-string))))
+        (tuple (: openstack-const user-agent)
+               (: openstack-const user-agent-string))))
 
 (defun get-auth-headers (content-type auth-token)
   (: lists merge (get-default-headers content-type)
-                 (list (tuple (: lferax-const x-auth-token)
+                 (list (tuple (: openstack-const x-auth-token)
                               auth-token))))
 
 (defun request (method request-data)
-  (: lferax-util start-services)
+  (: openstack-util start-services)
   (let* ((http-options ())
          (options ()))
     (: httpc request method request-data http-options options)))

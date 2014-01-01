@@ -1,7 +1,7 @@
-(defmodule lferax-const
+(defmodule openstack-const
   (export all)
   (import
-    (from lferax-util
+    (from openstack-util
           (dict 1))))
 
 

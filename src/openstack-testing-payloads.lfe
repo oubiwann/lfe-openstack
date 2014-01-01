@@ -1,4 +1,4 @@
-(defmodule lferax-testing-payloads
+(defmodule openstack-testing-payloads
   (export all))
 
 

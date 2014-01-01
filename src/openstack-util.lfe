@@ -1,4 +1,4 @@
-(defmodule lferax-util
+(defmodule openstack-util
   (export all))
 
 
