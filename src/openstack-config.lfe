@@ -1,11 +1,14 @@
 (defmodule openstack-config
   (export all))
 
-(defun open ()
+(defun open (config-file)
   (: application start 'gproc)
   (: application start 'econfig)
   (: econfig open_config 'os-config
-    (: lfe-utils expand-home-dir (: openstack-const config-file))))
+    (: lfe-utils expand-home-dir config-file)))
+
+(defun open ()
+  (open (: openstack-const config-file)))
 
 (defun get-value (section key)
   (open)
