@@ -53,7 +53,7 @@ To install, simply do the following:
     $ sudo ERL_LIB=`erl -eval 'io:fwrite(code:lib_dir()), halt().' -noshell` \
           make install
 
-We don't, however, recommend using ``lfe-openstack`` like this. Rather, using it
+We don't, however, recommend using ``lfe-openstack`` like this. Rather, use it
 with ``rebar`` from the ``clone`` ed directory.
 
 If you have another project where you'd like to utilize ``lfe-openstack``, then
