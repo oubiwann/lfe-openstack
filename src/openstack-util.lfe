@@ -1,23 +1,9 @@
 (defmodule openstack-util
-  (export all))
+  (export all)
+  (import
+    (from lfe-utils
+          (partition-list 1))))
 
-
-; XXX these two should probably be moved into lfe-utils ...
-(defun partition-list (list-data)
-  "This function takes lists of even length with an implicit key (atom) value
-  pairing and generates a list of two lists: one with all the keys, and the
-  other with all the values."
-  (: lists partition #'is_atom/1 list-data))
-
-(defun dict (data)
-  "'data' is a list of implicit pairs:
-    * the odd elements are keys of type 'atom'
-    * the even elemnts are the values.
-
-  This list is partitioned. zipped to tuples, and then converted to a dict."
-  (let (((tuple keys values) (partition-list data)))
-    (: dict from_list
-       (: lists zip keys values))))
 
 (defun json-wrap (data)
   "Ugh. I'm not a fan of JSON in Erlang. Really not a fan."

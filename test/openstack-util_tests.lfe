@@ -31,15 +31,7 @@
     'key-3 '"value 3"))
 
 (defun test-dict-2 ()
-  (: openstack-util dict (test-dict-data-2)))
-
-(defun partition-list_test ()
-  (let ((result (: openstack-util partition-list (test-dict-data-2))))
-    (assert-equal #((key-1 key-2) ("value 1" "value 2")) result)))
-
-(defun dict_test ()
-  (assert-equal '"value 1" `(: dict fetch 'key-1 ,(test-dict-2)))
-  (assert-equal '"value 2" `(: dict fetch 'key-2 ,(test-dict-2))))
+  (: lfe-util pair-dict (test-dict-data-2)))
 
 (defun json-wrap_test ()
   (let ((result-1 (: openstack-util json-wrap (test-dict-data-1)))

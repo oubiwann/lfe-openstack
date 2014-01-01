@@ -1,8 +1,8 @@
 (defmodule openstack-const
   (export all)
   (import
-    (from openstack-util
-          (dict 1))))
+    (from lfe-utils
+          (pair-dict 1))))
 
 
 ;; HTTP Header Names
@@ -36,7 +36,7 @@
 
 ;; Default OpenStack Cloud Services
 (defun services ()
-  (dict
+  (pair-dict
     (list
       'identity '"keystone"
       'compute '"nova"
