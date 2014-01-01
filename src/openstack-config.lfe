@@ -10,9 +10,12 @@
 (defun open ()
   (open (: openstack-const config-file)))
 
-(defun get-value (section key)
-  (open)
+(defun get-value (config-file section key)
+  (open config-file)
   (: econfig get_value 'os-config section key))
+
+(defun get-value (section key)
+  (get-value (: openstack-const config-file) section key))
 
 (defun get-username (provider)
   (get-value provider '"username"))
