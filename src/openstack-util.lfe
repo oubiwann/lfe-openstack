@@ -36,6 +36,7 @@
   (: inets start)
   (: ssl start))
 
+; XXX move the next 4 funcs into lfe-utils
 (defun get-home-dir ()
   (let (((list (tuple 'home (list home)))
          (: lists sublist (: init get_arguments) 3 1)))

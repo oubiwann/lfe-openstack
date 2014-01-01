@@ -14,36 +14,19 @@
    (json-wrap
      (list 'passwordCredentials
            (json-wrap-bin (list 'username username
-                                'password password)))))
-  ((username 'apikey apikey)
-   (json-wrap
-     (list 'RAX-KSKEY:apiKeyCredentials
-           (json-wrap-bin (list 'username username
-                                'apiKey apikey))))))
+                                'password password))))))
 
 (defun get-password-auth-payload (username password)
   (binary_to_list
     (: jiffy encode
       (json-wrap (list 'auth (build-creds username 'password password))))))
 
-(defun get-apikey-auth-payload (username apikey)
-  (binary_to_list
-    (: jiffy encode
-      (json-wrap (list 'auth (build-creds username 'apikey apikey))))))
-
 (defun get-auth-payload
-  ((username 'apikey apikey) (get-apikey-auth-payload username apikey))
   ((username 'password password) (get-password-auth-payload username password)))
 
-(defun password-login (username password)
+(defun authenticate (url username password)
   (: openstack-http post
-    (: openstack-const auth-url)
-    (get-auth-payload username 'password password)))
-
-(defun apikey-login (username apikey)
-  (: openstack-http post
-    (: openstack-const auth-url)
-    (get-auth-payload username 'apikey apikey)))
+    url (get-auth-payload username 'password password)))
 
 (defun get-disk-username ()
   (: openstack-util read-file (: openstack-const username-file)))
@@ -51,8 +34,8 @@
 (defun get-disk-password ()
   (: openstack-util read-file (: openstack-const password-file)))
 
-(defun get-disk-apikey ()
-  (: openstack-util read-file (: openstack-const apikey-file)))
+(defun get-disk-auth-url ()
+  (: openstack-util read-file (: openstack-const auth-url-file)))
 
 (defun get-env-username ()
   (: os getenv (: openstack-const username-env)))
@@ -60,8 +43,8 @@
 (defun get-env-password ()
   (: os getenv (: openstack-const password-env)))
 
-(defun get-env-apikey ()
-  (: os getenv (: openstack-const apikey-env)))
+(defun get-env-auth-url ()
+  (: os getenv (: openstack-const auth-url-env)))
 
 (defun get-username ()
   (let ((username (get-env-username)))
@@ -75,30 +58,24 @@
            password)
           ('true (get-disk-password)))))
 
-(defun get-apikey ()
-  (let ((apikey (get-env-apikey)))
-    (cond ((not (=:= apikey 'false))
-           apikey)
-          ('true (get-disk-apikey)))))
+(defun get-auth-url ()
+  (let ((auth-url (get-env-auth-url)))
+    (cond ((not (=:= auth-url 'false))
+           auth-url)
+          ('true (get-disk-auth-url)))))
 
-(defun get-apikey-or-password ()
-  (let ((apikey (get-apikey)))
-    (cond ((not (=:= apikey ""))
-           apikey)
-          ('true (get-password)))))
+(defun login (url username password)
+  (authenticate url username password))
 
-(defun login
-  ((username 'apikey apikey) (apikey-login username apikey))
-  ((username 'password password) (password-login username password)))
+(defun login (('provider provider)
+  (let ((username (: openstack-config get-username provider))
+        (password (: openstack-config get-password provider))
+        (url (: openstack-config get-auth-url provider)))
+    (login url username password))))
 
 (defun login ()
   ""
-  (login (get-username) 'apikey (get-apikey)))
-
-(defun login (mode)
-  ""
-  (cond ((=:= mode 'apikey) (login))
-        ('true (login (get-username) 'password (get-password)))))
+  (login (get-auth-url) (get-username) (get-password)))
 
 (defun get-token (identity-response)
   (binary_to_list

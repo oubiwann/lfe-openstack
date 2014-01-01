@@ -107,7 +107,10 @@ Directly, using ``login/3``
 
 .. code:: common-lisp
 
-    > (: openstack-identity login '"alice" 'apikey `"1234abcd")
+    > (: openstack-identity login
+        '"http://api.openstack.host:5000/v2.0/tokens"
+        '"alice"
+        '"secretpwd")
 
 or
 
@@ -116,13 +119,50 @@ or
     > (: openstack-identity login '"alice" 'password `"asecret")
 
 
+Indirectly, using ``login/2``
+-----------------------------
+
+To use this login method, you'll need to have the ``~/.openstack/providers.cfg``
+file created, with content similar to the following:
+
+.. code::
+
+  [openstack-host]
+  username=alice
+  password=secretpwd
+  tenant-id=abc123
+  auth-url=http://api.openstack.host:5000/v2.0/tokens
+
+  [trystack]
+  username=alice
+  password=secret2
+  tenant-id=efg456
+  auth-url=http://trystack.org:5000/v2.0/tokens
+
+With your providers config file set up, you can then do the following:
+
+.. code:: common-lisp
+
+    > (: openstack-identity login 'provider '"openstack-host")
+
+or
+
+    > (: openstack-identity login 'provider '"trystack")
+
+and the appropriate configuration data will be read from that file.
+
+
 Indirectly, using ``login/0``
 -----------------------------
 
+If you have environment variables set or values stored in files, you can log in
+without any parameters:
+
 .. code:: bash
 
-    $ export RAX_USERNAME=alice
-    $ export RAX_APIKEY=1234abcd
+    $ export OS_USERNAME=alice
+    $ export OS_PASSWORD=secretpwd
+    $ export OS_AUTH_URL=http://api.openstack.host:5000/v2.0/tokens
 
 .. code:: common-lisp
 
@@ -132,36 +172,13 @@ or
 
 .. code:: bash
 
-    $ cat "alice" > ~/.rax/username
-    $ cat "1234abcd" > ~/.rax/apikey
+    $ cat "alice" > ~/.openstack/username
+    $ cat "secretpwd" > ~/.openstack/apikey
+    $ cat "http://api.openstack.host:5000/v2.0/tokens" > ~/.openstack/auth-url
 
 .. code:: common-lisp
 
     > (: openstack-identity login)
-
-
-Indirectly, using ``login/1``
------------------------------
-
-.. code:: bash
-
-    $ export RAX_USERNAME=alice
-    $ export RAX_PASSWORD=asecret
-
-.. code:: common-lisp
-
-    > (: openstack-identity login 'password)
-
-or
-
-.. code:: bash
-
-    $ cat "alice" > ~/.rax/username
-    $ cat "asecret" > ~/.rax/password
-
-.. code:: common-lisp
-
-    > (: openstack-identity login 'password)
 
 In the presence of both defined env vars and cred files, env will allways be
 the default source of truth and files will only be used in the absence of

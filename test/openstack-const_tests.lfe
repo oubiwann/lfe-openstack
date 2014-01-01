@@ -17,10 +17,10 @@
 
 (defun services_test ()
   (assert-equal
-    '""
+    '"keystone"
     `(: dict fetch 'identity (: openstack-const services)))
   (assert-equal
-    '""
+    '"nova"
     `(: dict fetch 'compute (: openstack-const services)))
   (assert-equal
     '""
@@ -38,3 +38,7 @@
   (assert-equal '"OS_PASSWORD" `(: openstack-const password-env))
   (assert-equal '"OS_TENANT_NAME" `(: openstack-const tenant-env))
   (assert-equal '"OS_AUTH_URL" `(: openstack-const auth-url-env)))
+
+(defun config_test ()
+  (assert-equal '"~/.openstack/providers.cfg" `(: openstack-const config-file)))
+

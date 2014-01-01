@@ -26,13 +26,6 @@
                              #(password #B(97 115 101 99 114 101 116)))))))))
     (assert-equal expected data)))
 
-(defun build-creds-apikey_test ()
-  (let ((data (build-creds '"alice" 'apikey '"123abc"))
-        (expected #((#(RAX-KSKEY:apiKeyCredentials
-                        #((#(username #B(97 108 105 99 101))
-                             #(apiKey #B(49 50 51 97 98 99)))))))))
-    (assert-equal expected data)))
-
 ; XXX this unit test is currently broken
 (defun get-password-auth-payload_test_skip ()
   (let ((data (get-password-auth-payload '"alice" '"asecret"))

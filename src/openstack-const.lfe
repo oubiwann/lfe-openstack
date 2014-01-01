@@ -32,14 +32,15 @@
 (defun password-env () '"OS_PASSWORD")
 (defun tenant-env () '"OS_TENANT_NAME")
 (defun auth-url-env () '"OS_AUTH_URL")
+(defun config-file () (: filename join (list (dot-dir) '"providers.cfg")))
 
 ;; Default OpenStack Cloud Services
 (defun services ()
   (dict
     (list
-      'identity '""
-      'compute '""
-      'image '""
+      'identity '"keystone"
+      'compute '"nova"
+      'image '"galance"
       'block-storage '""
       'networking '""
       'object-storage '""
