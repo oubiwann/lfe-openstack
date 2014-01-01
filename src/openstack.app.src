@@ -1,5 +1,5 @@
 %% -*- erlang -*-
-{application, 'openstack',
+{application, 'lfe-openstack',
  [
   %% A quick description of the application.
   {description, "Pure LFE language bindings for OpenStack Clouds"},
