@@ -58,6 +58,8 @@
   (binary_to_list
     (: jiffy encode (get-new-server-payload server-name image-id flavor-id))))
 
+; XXX this needs to be changed for openstack; implementation below is Rackspace-
+; specific
 (defun create-server (identity-response region server-name image-id flavor-id)
   (let ((base-url (: openstack-services get-cloud-servers-v2-url
                     identity-response
@@ -67,6 +69,8 @@
       (get-new-server-encoded-payload server-name image-id flavor-id)
       (: openstack-identity get-token identity-response))))
 
+; XXX this needs to be changed for openstack; implementation below is Rackspace-
+; specific
 (defun get-server-list (identity-response region)
   (let ((base-url (: openstack-services get-cloud-servers-v2-url
                      identity-response
