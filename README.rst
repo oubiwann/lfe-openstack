@@ -308,39 +308,14 @@ keying off the appropriate atom for the service that you need, e.g.:
 
 .. code:: common-lisp
 
-    (set service (: dict fetch 'servers-v2 (: openstack-const services)))
-    (: openstack-services get-service-endpoints response service)
-
-We provide some alias functions for commonly used service endpoints, e.g.:
-
-.. code:: common-lisp
-
-    (: openstack-services get-cloud-servers-v2-endpoints auth-response)
-
-
-Region Endpoint URL
--------------------
-
-Furthermore, you can get a service's URL by region:
-
-.. code:: common-lisp
-
-    (: openstack-services get-cloud-servers-v2-url auth-response '"DFW")
-
-A full list of regions that can be passed (as in "DFW" above) is
-provided in ``(: openstack-consts services)``.
-
-We actually recommand using the documented atoms for the regions (just like
-the services above):
-
-.. code:: common-lisp
-
-    (set region (: dict fetch 'dfw (: openstack-const regions)))
-    (: openstack-services get-cloud-servers-v2-url auth-response region)
+    (set service (: dict fetch 'compute (: openstack-const services)))
+    (: openstack-services get-service-endpoints auth-response service)
 
 
 Cloud Servers
 =============
+
+WARNING: The following section has not been converted from lfe-rackspace yet.
 
 For the conveneince of the reader, in the following examples, we will give each
 command needed to go from initial login to final result.
