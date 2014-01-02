@@ -12,6 +12,8 @@
     (: ej get #("name") json-data)
     (tuple (: ej get #("id") json-data))))
 
+; XXX this needs to be changed for openstack; implementation below is Rackspace-
+; specific
 (defun get-data (identity-response url-path region)
   (let* ((base-url (: openstack-services get-cloud-servers-v2-url
                      identity-response
@@ -22,6 +24,7 @@
        url
        (: openstack-identity get-token identity-response)))))
 
+; XXX the openstack version doesn't use regions; update
 (defun get-list (identity-response region type)
   (: lists map
      #'get-name-id/1
@@ -31,9 +34,11 @@
                   (++ '"/" type)
                   region))))
 
+; XXX the openstack version doesn't use regions; update
 (defun get-flavors-list (identity-response region)
   (get-list identity-response region '"flavors"))
 
+; XXX the openstack version doesn't use regions; update
 (defun get-images-list (identity-response region)
   (get-list identity-response region '"images"))
 
