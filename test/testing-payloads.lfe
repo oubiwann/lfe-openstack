@@ -1,4 +1,4 @@
-(defmodule openstack-testing-payloads
+(defmodule testing-payloads
   (export all))
 
 
