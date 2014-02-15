@@ -54,7 +54,7 @@ $(EXPM): $(BIN_DIR)
 	curl -o $(EXPM) http://expm.co/__download__/expm
 	chmod +x $(EXPM)
 
-get-deps: $(EXPM)
+get-deps:
 	rebar get-deps
 	for DIR in $(wildcard $(DEPS)/*); do cd $$DIR; echo "Updating $$DIR ..."; git pull; cd - > /dev/null; done
 	mkdir -p $(CONFIG_DIR)
@@ -69,16 +69,21 @@ compile: get-deps clean-ebin
 	rebar compile
 	cd $(JIFFY_DIR) && rebar compile
 
-compile-only: clean-ebin
+compile-no-deps: clean-ebin
 	rebar compile skip_deps=true
 
 compile-tests: clean-eunit
 	mkdir -p $(TEST_OUT_DIR)
 	ERL_LIBS=$(ERL_LIBS) $(LFEC) -o $(TEST_OUT_DIR) $(TEST_DIR)/*_tests.lfe
+	-ERL_LIBS=$(ERL_LIBS) $(LFEC) -o $(OUT_DIR) $(TEST_DIR)/testing-*.lfe
 
 shell: compile
 	clear
 	ERL_LIBS=$(ERL_LIBS) $(LFE) -pa $(TEST_OUT_DIR)
+
+shell-no-deps: compile-no-deps
+	clear
+	@ERL_LIBS=$(ERL_LIBS) $(LFE) -pa $(TEST_OUT_DIR)
 
 clean: clean-ebin clean-eunit
 	rebar clean
@@ -87,7 +92,7 @@ check: compile compile-tests
 	@clear;
 	@rebar eunit verbose=1 skip_deps=true
 
-check-only: compile-only compile-tests
+check-no-deps: compile-no-deps compile-tests
 	@clear;
 	@rebar eunit verbose=1 skip_deps=true
 
@@ -112,5 +117,5 @@ install: compile
 		&& exit 1; \
 	fi
 
-upload:
+upload: $(EXPM)
 	$(EXPM) publish
