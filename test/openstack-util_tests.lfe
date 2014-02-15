@@ -3,17 +3,13 @@
   (import
     (from lfeunit-util
           (check-failed-assert 2)
-          (check-wrong-assert-exception 2))
-    (from lfeunit
-          (assert 1)
-          (assert-not 1)
-          (assert-equal 2)
-          (assert-not-equal 2)
-          (assert-exception 3)
-          (assert-error 2)
-          (assert-throw 2)
-          (assert-exit 2))))
+          (check-wrong-is-exception 2))
+    (rename lfe-rest-client
+            ((get-default-headers 1) get-headers))
+    (from lfe-rest-client-util
+          (get-body 1))))
 
+(include-lib "deps/lfeunit/include/lfeunit-macros.lfe")
 
 (defun test-dict-data-1 ()
   (list
@@ -33,7 +29,7 @@
 (defun test-dict-2 ()
   (: lfe-util pair-dict (test-dict-data-2)))
 
-(defun json-wrap_test ()
+(deftest json-wrap
   (let ((result-1 (: openstack-util json-wrap (test-dict-data-1)))
         (result-2 (: openstack-util json-wrap (test-dict-data-2)))
         (result-3 (: openstack-util json-wrap (test-dict-data-3))))
@@ -42,7 +38,7 @@
     (assert-equal #((#(key-1 "value 1") #(key-2 "value 2") #(key-3 "value 3")))
                   result-3)))
 
-(defun json-wrap-bin_test ()
+(deftest json-wrap-bin
   (let ((result-1 (: openstack-util json-wrap-bin (test-dict-data-1)))
         (result-2 (: openstack-util json-wrap-bin (test-dict-data-2)))
         (result-3 (: openstack-util json-wrap-bin (test-dict-data-3))))
